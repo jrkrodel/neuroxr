@@ -30,44 +30,11 @@ p {
   --dark-red: #990000;
 }
 
-/* Page Titles */
-.title-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-top: 85px;
-}
-
-.title-center-midpage {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin-bottom: 85px;
-  margin-top: 85px;
-}
-
-.center {
-  margin: 0 auto;
-}
-
-.center-text {
-  text-align: center;
-}
-
-.no-border {
-  border: none;
-  margin-top: 0;
-}
-
+/* Place Holders */
 .red-box {
   width: 32px;
   height: 8px;
   background-color: var(--dark-red);
-}
-
-.page-title {
-  font-size: 41px;
-  margin-bottom: 16px;
 }
 
 .home-hero {
@@ -76,23 +43,10 @@ p {
   background-color: var(--dark-red);
 }
 
-/* 3 Home Goals */
-
 .goal-icon {
   width: 116px;
   height: 116px;
   background-color: var(--dark-red);
   margin-bottom: 16px;
   margin-top: 50px;
-}
-
-.goal-icon:first-of-type {
-  width: 116px;
-  height: 116px;
-  background-color: var(--dark-red);
-  margin-bottom: 16px;
-}
-
-.goal-title {
-  font-size: 16px;
 }
