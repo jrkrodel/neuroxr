@@ -34,7 +34,7 @@ p {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 85px;
+  margin-top: 85px;
 }
 
 .title-center-midpage {
@@ -66,6 +66,7 @@ p {
 
 .page-title {
   font-size: 41px;
+  margin-bottom: 16px;
 }
 
 .home-hero {
@@ -78,6 +79,14 @@ p {
 /* 3 Home Goals */
 
 .goal-icon {
+  width: 116px;
+  height: 116px;
+  background-color: var(--dark-red);
+  margin-bottom: 16px;
+  margin-top: 50px;
+}
+
+.goal-icon:first-of-type {
   width: 116px;
   height: 116px;
   background-color: var(--dark-red);
