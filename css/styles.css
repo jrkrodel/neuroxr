@@ -2,7 +2,7 @@
   margin: 0;
   padding: 0;
   -webkit-box-sizing: border-box;
-          box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 html,
@@ -22,4 +22,49 @@ p {
 
 #app {
   min-height: 79.8vh;
+}
+
+/* Colors */
+:root {
+  --dark-red: #990000;
+}
+
+/* Page Titles */
+.title-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 85px;
+}
+.center {
+  margin: auto;
+}
+
+.red-box {
+  width: 32px;
+  height: 8px;
+  background-color: var(--dark-red);
+}
+
+.page-title {
+  font-size: 41px;
+}
+
+.home-hero {
+  width: 159px;
+  height: 159px;
+  background-color: var(--dark-red);
+}
+
+/* 3 Home Goals */
+
+.goal-icon {
+  width: 116px;
+  height: 116px;
+  background-color: var(--dark-red);
+  margin-bottom: 16px;
+}
+
+.goal-title {
+  font-size: 16px;
 }
