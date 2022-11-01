@@ -36,8 +36,26 @@ p {
   justify-content: center;
   margin-bottom: 85px;
 }
+
+.title-center-midpage {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 85px;
+  margin-top: 85px;
+}
+
 .center {
-  margin: auto;
+  margin: 0 auto;
+}
+
+.center-text {
+  text-align: center;
+}
+
+.no-border {
+  border: none;
+  margin-top: 0;
 }
 
 .red-box {
@@ -53,6 +71,7 @@ p {
 .home-hero {
   width: 159px;
   height: 159px;
+  margin-bottom: 30px;
   background-color: var(--dark-red);
 }
 
