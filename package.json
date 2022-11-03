@@ -15,7 +15,8 @@
     "webpack-cli": "^4.10.0"
   },
   "scripts": {
-    "build": "node_modules/.bin/webpack"
+    "build": "node_modules/.bin/webpack",
+    "serve": "live-server dist"
   },
   "repository": {
     "type": "git",
