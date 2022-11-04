@@ -28,6 +28,7 @@ p {
 /* Colors */
 :root {
   --dark-red: #990000;
+  --gray: #4c5a69;
 }
 
 .red-box {
@@ -50,4 +51,24 @@ p {
   background-color: var(--dark-red);
   margin-bottom: 16px;
   margin-top: 50px;
+}
+
+/* Our Research Hero */
+.container {
+  position: relative;
+  text-align: center;
+  color: white;
+}
+
+.research-hero {
+  height: 400px;
+  width: 1080px;
+}
+
+.research-hero-title {
+  font-size: 41px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
