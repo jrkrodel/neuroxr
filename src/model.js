@@ -10,7 +10,7 @@ const client = sanityClient({
 
 const getFeatures = (page) => {
   $(`#${page}-features`).append(`
-  <div class="rvt-flex rvt-justify-center rvt-p-top-xxl rvt-items-center">
+  <div class="rvt-flex rvt-justify-center rvt-p-all-xxl rvt-items-center">
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
   </div>
   `);
@@ -50,6 +50,41 @@ const getFeatures = (page) => {
   });
 };
 
+const getCards = (page, cardType) => {
+  const query = `*[_type == "card" && type == "${cardType}"]`;
+
+  client.fetch(query).then((cards) => {
+    $(`#${page}-${cardType}Cards`).empty();
+    cards.forEach((card, ind) => {
+      const description = toHTML(card.desc, {
+        components: {
+          /* optional object of custom components to use */
+        },
+      });
+      $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md ">
+        <div class="rvt-card">
+          <div class="rvt-card__image">
+            <img
+              src="https://rivet.iu.edu/img/placeholder/list-card-3.jpg"
+              alt="Smiling students sitting outside on a bench"
+            />
+          </div>
+          <div class="rvt-card__body">
+            <h2 class="rvt-card__title">
+              <a href="#">${card.title}</a>
+            </h2>
+            <div class="rvt-card__content [ rvt-flow ]">
+              <p>
+                ${description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>`);
+    });
+  });
+};
+
 const changePage = function (page, callback) {
   if (page == "") {
     $.get(`pages/home/home.html`, function (data) {
@@ -61,7 +96,12 @@ const changePage = function (page, callback) {
     $.get(`pages/${page}/${page}.html`, function (data) {
       $("#app").empty();
       $("#app").append(data);
-
+      if (page === "resources-equipment") {
+        getCards(page, "equipment");
+        getCards(page, "role");
+      } else if (page === "get-involved") {
+        getCards(page, "sRole");
+      }
       if (callback) {
         callback(page);
       }
