@@ -31,6 +31,10 @@ p {
   --gray: #4c5a69;
 }
 
+.gray {
+  color: #4c5a69;
+}
+
 .red-box {
   width: 32px;
   height: 8px;
@@ -71,4 +75,19 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+/* Contact Us */
+
+.lets-chat {
+  display: flex;
+  flex-direction: column;
+  width: max-content;
+}
+
+.social-icon {
+  width: 35px;
+  height: 35px;
+  margin-right: 30px;
+  background-color: var(--dark-red);
 }
