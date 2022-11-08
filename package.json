@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "@portabletext/to-html": "^1.0.4",
-    "@sanity/client": "^3.4.1"
+    "@sanity/client": "^3.4.1",
+    "@sanity/image-url": "^1.0.1"
   },
   "name": "neuroxr",
   "version": "1.0.0",
