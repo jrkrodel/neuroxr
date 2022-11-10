@@ -83,6 +83,8 @@ p {
   display: flex;
   flex-direction: column;
   width: max-content;
+  padding-left: 8.4rem;
+  margin-bottom: 4rem;
 }
 
 .social-icon {
