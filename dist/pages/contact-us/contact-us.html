@@ -2,48 +2,97 @@
     Main content area
 *************************************************************************** -->
 
-<main
-  id="main-content"
-  class="rvt-layout__wrapper rvt-flow"
->
+<main id="main-content" class="rvt-layout__wrapper rvt-flow">
   <div class="rvt-layout__content">
     <!-- ******************************************************************
             Page content
         ******************************************************************* -->
 
-        <!-- Let's Chat Title -->
-        <div class="lets-chat">
-        <div class="red-box" style="align-self: center;"></div>
-        <h1 class="rvt-ts-lg">Let's Chat</h1>
+    <!-- Let's Chat Title -->
+    <div class="lets-chat">
+      <div class="red-box" style="align-self: center"></div>
+      <h1 class="rvt-ts-lg">Let's Chat</h1>
+    </div>
+
+    <!-- Phone, email, and socials -->
+    <div class="rvt-flex" style="justify-content: space-around; margin-bottom: 4rem;">
+      <!-- Phone -->
+      <div>
+        <h2 class="rvt-ts-md">Phone</h2>
+        <h3 class="gray rvt-ts-sm">(###) ###-####</h3>
+      </div>
+
+      <!-- Email -->
+      <div>
+        <h2 class="rvt-ts-md">Email</h2>
+        <h3 class="gray rvt-ts-sm">NeuroXR@email.com</h3>
+      </div>
+
+      <!-- Social Media -->
+      <div>
+        <h2 class="rvt-ts-md">Socials</h2>
+        <div style="display: flex">
+          <!-- (Social media icons to later be changed to img) -->
+          <div class="social-icon"></div>
+          <div class="social-icon"></div>
+          <div class="social-icon"></div>
         </div>
+      </div>
+    </div>
 
-        <!-- Phone, email, and socials -->
-        <div class="rvt-flex" style="justify-content: space-around;">
-          <!-- Phone -->
-          <div>
-            <h2 class="rvt-ts-md">Phone</h2>
-            <h3 class="gray rvt-ts-sm">(###) ###-####</h3>
-          </div>
+    <!-- Form -->
+    <form action="">
+      <!-- Top row: name and email -->
+      <div class="rvt-flex" style="justify-content: space-around; margin-bottom: 4rem;">
 
-          <!-- Email -->
-          <div>
-            <h2 class="rvt-ts-md">Email</h2>
-            <h3 class="gray rvt-ts-sm">NeuroXR@email.com</h3>
-          </div>
-
-          <!-- Social Media -->
-          <div>
-            <h2 class="rvt-ts-md">Socials</h2>
-          <div style="display: flex;">
-            <!-- (Social media icons to later be changed to img) -->
-            <div class="social-icon"></div>
-            <div class="social-icon"></div>
-            <div class="social-icon"></div>
-          </div>
-          </div>
+        <!-- First name -->
+        <div>
+          <label class="gray rvt-ts-sm" for="fname">First Name</label><br />
+          <input  class="rvt-width-sm"  style= "height: 2.8rem; margin-top: 1rem;" type="text" id="fname" name="fname" /><br />
         </div>
-
-        
     
+        <!-- Last name -->
+<div>
+  <label class="gray rvt-ts-sm" for="lname">Last Name</label><br />
+  <input class="rvt-width-sm"  style= "height: 2.8rem; margin-top: 1rem;" type="text" id="lname" name="lname" /><br />
+</div>
+     
+<!-- Email -->
+<div>
+  <label class="gray rvt-ts-sm" for="email">Email</label><br />
+  <input class="rvt-width-lg"  style= "height: 2.8rem; margin-top: 1rem; width: 18rem;" type="email" id="email" name="email" /><br /><br />
+</div>
+
+       
+      </div>
+
+      <!-- Second row: subject and role -->
+      <div style="display: flex; margin-bottom: 4rem;" >
+        <!-- Subject line -->
+        <div style="margin-right: 2.4rem; padding-left: 8.1rem;">
+          <label class="gray rvt-ts-sm" for="subject">Subject</label><br />
+          <input style= "height: 2.8rem; margin-top: 1rem; width: 25rem;" type="text" id="subject" name="subject" /><br /><br />
+        </div>
+       
+
+        <!-- Drop-down selection -->
+        <select class="rvt-button" style="margin-top: 3rem;" name="roleSelect" id="role-select">
+          
+          <option value="student">Student</option>
+          <option value="collaborator">Collaborator</option>
+        </select>
+      </div>
+
+      <div style="margin-bottom: 4rem; padding-left: 8.1rem;">
+        <label class="gray rvt-ts-sm" for="message">Message</label> <br />
+        <textarea style= "margin-top: 1rem;" id="message" name="message" rows="7" cols="130"> </textarea>
+        <br />
+      </div>
+
+      <div style="display:flex; justify-content: center;">
+        <input class="rvt-button rvt-button--full-width" style="width: 25rem; " type="submit" value="Submit" />
+      </div>
+      
+    </form>
   </div>
 </main>
