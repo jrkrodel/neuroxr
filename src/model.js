@@ -192,7 +192,7 @@ const changePage = function (page, callback) {
           data: form, // serializes the form's elements.
           success: function (result) {
             if (result !== "sent") {
-              console.log("error");
+              console.log(result);
             }
           },
         });

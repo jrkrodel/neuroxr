@@ -85,3 +85,7 @@ p {
   margin-right: 30px;
   background-color: var(--dark-red);
 }
+
+form #website {
+  display: none;
+}

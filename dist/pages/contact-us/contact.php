@@ -1,9 +1,12 @@
 <?php
 
-  $fNameErr = $lNameErr = $emailErr = $subjectErr = $roleErr = $messageErr = "";
   $fName = $lName = $email = $subject = $role = $message = "";
   
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    if(!empty($_POST['website'])) { 
+      die();
+    }
 
     if (empty($_POST["fname"])) {
         $fNameErr = "fname";
@@ -77,6 +80,12 @@
           $messageErr = 'Your message should not be empty';
           return;
         }
+
+        if(preg_match('/http|www/i',$message)) {
+          $messageErr = "We do not allow a url in the comment";
+          echo $messageErr;
+          return;
+        }
       
         if(!isset($fNameErr) && !isset($lNameErr) && !isset($emailErr) && !isset($subjectErr) && !isset($messageErr) && !isset($roleErr)){
           $to = 'jrkrodel@iu.edu'; 
@@ -85,11 +94,11 @@
             echo 'sent';
             return;
           }else{
-            echo 'Error';
+            echo 'Error Here';
             return;
           }
     } else {
-      echo "Error";
+      echo "Error There";
       return;
     }
   }
