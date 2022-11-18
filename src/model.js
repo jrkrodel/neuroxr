@@ -174,8 +174,33 @@ const changePage = function (page, callback) {
       $("#app").append(data);
       getFeatures("home");
     });
+  } else if (page === "contact-us") {
+    $.get(`pages/contact-us/contact-us.html`, function (data) {
+      $("#app").empty();
+      $("#app").append(data);
+      $("#contactForm").submit(function (e) {
+        e.preventDefault(); // avoid to execute the actual submit of the form.
+
+        const form = $(this).serialize();
+        const actionUrl = $(this).attr("action");
+
+        console.log(form);
+
+        $.ajax({
+          type: "POST",
+          url: actionUrl,
+          data: form, // serializes the form's elements.
+          success: function (result) {
+            if (result !== "sent") {
+              console.log("error");
+            }
+          },
+        });
+      });
+    });
   } else {
     $.get(`pages/${page}/${page}.html`, function (data) {
+      console.log(page);
       $("#app").empty();
       $("#app").append(data);
       if (page === "resources-equipment") {

@@ -79,14 +79,6 @@ p {
 
 /* Contact Us */
 
-.lets-chat {
-  display: flex;
-  flex-direction: column;
-  width: max-content;
-  padding-left: 8.4rem;
-  margin-bottom: 4rem;
-}
-
 .social-icon {
   width: 35px;
   height: 35px;

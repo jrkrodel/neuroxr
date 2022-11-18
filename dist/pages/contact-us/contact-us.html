@@ -3,19 +3,34 @@
 *************************************************************************** -->
 
 <main id="main-content" class="rvt-layout__wrapper rvt-flow">
-  <div class="rvt-layout__content">
+  <!-- <form id="contactForm" action="./pages/contact-us/contact.php" method="POST">
+    <label for="name">Name:</label><br />
+    <input id="name" type="text" name="name" />
+    <label for="subject">Subject:</label><br />
+    <input id="subject" type="text" name="subject" />
+    <label for="email">Email:</label><br />
+    <input id="email" type="email" name="email" />
+    <label for="message">Message:</label><br />
+    <textarea id="message" name="message"></textarea>
+    <input type="submit" name="submit" id="submitButton" value="Submit" />
+  </form> -->
+  <div class="rvt-layout__content rvt-container-lg">
     <!-- ******************************************************************
             Page content
         ******************************************************************* -->
 
     <!-- Let's Chat Title -->
-    <div class="lets-chat">
-      <div class="red-box" style="align-self: center"></div>
-      <h1 class="rvt-ts-lg">Let's Chat</h1>
+    <div class="rvt-flex rvt-flex-column">
+      <div
+        class="rvt-self-start rvt-flex rvt-items-center rvt-flex-column rvt-m-bottom-md"
+      >
+        <div class="red-box"></div>
+        <h1 class="rvt-ts-lg">Let's Chat</h1>
+      </div>
     </div>
 
     <!-- Phone, email, and socials -->
-    <div class="rvt-flex" style="justify-content: space-around; margin-bottom: 4rem;">
+    <div class="rvt-flex-md-up rvt-justify-space-between">
       <!-- Phone -->
       <div>
         <h2 class="rvt-ts-md">Phone</h2>
@@ -31,7 +46,7 @@
       <!-- Social Media -->
       <div>
         <h2 class="rvt-ts-md">Socials</h2>
-        <div style="display: flex">
+        <div class="rvt-flex">
           <!-- (Social media icons to later be changed to img) -->
           <div class="social-icon"></div>
           <div class="social-icon"></div>
@@ -41,58 +56,95 @@
     </div>
 
     <!-- Form -->
-    <form action="">
+    <form
+      id="contactForm"
+      action="./pages/contact-us/contact.php"
+      method="POST"
+    >
       <!-- Top row: name and email -->
-      <div class="rvt-flex" style="justify-content: space-around; margin-bottom: 4rem;">
-
+      <div class="rvt-flex-md-up">
         <!-- First name -->
-        <div>
-          <label class="gray rvt-ts-sm" for="fname">First Name</label><br />
-          <input  class="rvt-width-sm"  style= "height: 2.8rem; margin-top: 1rem;" type="text" id="fname" name="fname" /><br />
+        <div class="rvt-items-center rvt-m-right-xxl-md-up">
+          <label for="fname" class="rvt-label rvt-m-top-md">First Name</label>
+          <input
+            type="text"
+            required
+            id="fname"
+            name="fname"
+            class="rvt-text-input"
+          />
         </div>
-    
         <!-- Last name -->
-<div>
-  <label class="gray rvt-ts-sm" for="lname">Last Name</label><br />
-  <input class="rvt-width-sm"  style= "height: 2.8rem; margin-top: 1rem;" type="text" id="lname" name="lname" /><br />
-</div>
-     
-<!-- Email -->
-<div>
-  <label class="gray rvt-ts-sm" for="email">Email</label><br />
-  <input class="rvt-width-lg"  style= "height: 2.8rem; margin-top: 1rem; width: 18rem;" type="email" id="email" name="email" /><br /><br />
-</div>
+        <div class="rvt-items-center rvt-m-right-xxl-md-up">
+          <label class="rvt-label rvt-m-top-md" for="lname">Last Name</label>
+          <input
+            class="rvt-text-input"
+            required
+            type="text"
+            id="lname"
+            name="lname"
+          />
+        </div>
 
-       
+        <!-- Email -->
+        <div class="rvt-grow-1 rvt-items-center">
+          <label class="rvt-label rvt-m-top-md" for="email">Email</label>
+          <input
+            class="rvt-text-input"
+            required
+            type="email"
+            id="email"
+            name="email"
+          />
+        </div>
       </div>
 
       <!-- Second row: subject and role -->
-      <div style="display: flex; margin-bottom: 4rem;" >
+      <div class="rvt-flex-sm-up rvt-m-top-md">
         <!-- Subject line -->
-        <div style="margin-right: 2.4rem; padding-left: 8.1rem;">
-          <label class="gray rvt-ts-sm" for="subject">Subject</label><br />
-          <input style= "height: 2.8rem; margin-top: 1rem; width: 25rem;" type="text" id="subject" name="subject" /><br /><br />
+        <div class="rvt-grow-1 rvt-m-right-xxl-sm-up rvt-items-center">
+          <label class="rvt-label" for="subject">Subject</label>
+          <input
+            class="rvt-text-input"
+            required
+            type="text"
+            id="subject"
+            name="subject"
+          />
         </div>
-       
 
         <!-- Drop-down selection -->
-        <select class="rvt-button" style="margin-top: 3rem;" name="roleSelect" id="role-select">
-          
-          <option value="student">Student</option>
-          <option value="collaborator">Collaborator</option>
-        </select>
+        <div>
+          <label for="roleSelect" class="rvt-label rvt-m-top-md-up"
+            >Role:</label
+          >
+          <select class="rvt-select" name="roleSelect" id="role-select">
+            <option value="student">Student</option>
+            <option value="collaborator">Collaborator</option>
+          </select>
+        </div>
       </div>
 
-      <div style="margin-bottom: 4rem; padding-left: 8.1rem;">
-        <label class="gray rvt-ts-sm" for="message">Message</label> <br />
-        <textarea style= "margin-top: 1rem;" id="message" name="message" rows="7" cols="130"> </textarea>
-        <br />
+      <div class="rvt-flex rvt-m-top-md">
+        <div>
+          <label class="rvt-label" for="message">Message</label>
+          <textarea
+            class="rvt-textarea"
+            id="message"
+            name="message"
+            cols="130"
+            required
+          ></textarea>
+        </div>
       </div>
 
-      <div style="display:flex; justify-content: center;">
-        <input class="rvt-button rvt-button--full-width" style="width: 25rem; " type="submit" value="Submit" />
+      <div class="rvt-m-top-md">
+        <input
+          class="rvt-button rvt-button--full-width"
+          type="submit"
+          value="Submit"
+        />
       </div>
-      
     </form>
   </div>
 </main>
