@@ -229,6 +229,38 @@ const getProfiles = (page) => {
   });
 };
 
+const getResearch = (page) => {
+  $(`#${page}-research`).append(`
+  <div class="rvt-flex rvt-justify-center rvt-p-all-xxl rvt-items-center">
+    <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
+  </div>
+  `);
+  const query = `*[_type == "research_doc"] {
+    ...,
+    "doc_url": file.asset->url
+  }`;
+
+  client.fetch(query).then((research) => {
+    $(`#${page}-research`).empty();
+    research.forEach((doc, ind) => {
+      const description = toHTML(doc.description, {
+        components: {
+          /* optional object of custom components to use */
+        },
+      });
+      $(`#${page}-research`).append(`  
+      <li class="rvt-link-hub__item">
+      <a class="rvt-link-hub__link" target="_blank" href="${doc.doc_url}">
+        <span class="rvt-link-hub__text">${doc.title}</span>
+        <span class="rvt-link-hub__description"
+          >${description}</span
+        >
+      </a>
+    </li>`);
+    });
+  });
+};
+
 const changePage = function (page, callback) {
   if (page == "") {
     $.get(`pages/home/home.html`, function (data) {
@@ -274,6 +306,8 @@ const changePage = function (page, callback) {
         getCards(page, "sRole");
       } else if (page === "our-team") {
         getProfiles(page);
+      } else if (page === "our-research") {
+        getResearch(page);
       }
       if (callback) {
         callback(page);
