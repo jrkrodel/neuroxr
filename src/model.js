@@ -32,8 +32,17 @@ const getFeatures = (page) => {
           /* optional object of custom components to use */
         },
       });
-      $(`#${page}-features`)
-        .append(`<div class="rvt-container-lg rvt-p-tb-xl rvt-p-tb-3-xl-md-up">
+      let url;
+      if (feature?.link_type === "internal") {
+        url = feature.i_url;
+      } else if (feature?.link_type === "external") {
+        url = feature.e_url;
+      } else {
+        url = null;
+      }
+      if (url !== null) {
+        $(`#${page}-features`)
+          .append(`<div class="rvt-container-lg rvt-p-tb-xl rvt-p-tb-3-xl-md-up">
       <div class="rvt-billboard ${
         ind % 2 == 0 ? "" : "rvt-billboard--reverse"
       }">
@@ -49,11 +58,33 @@ const getFeatures = (page) => {
           </h2>
           <div class="rvt-billboard__content [ rvt-flow ]">
             ${description}
-            <a class="rvt-cta" href="${feature.i_url}"> See all our people </a>
+            <a class="rvt-cta" href="${url}">${feature.link_text}</a>
           </div>
         </div>
       </div>
     </div>`);
+      } else {
+        $(`#${page}-features`)
+          .append(`<div class="rvt-container-lg rvt-p-tb-xl rvt-p-tb-3-xl-md-up">
+    <div class="rvt-billboard ${ind % 2 == 0 ? "" : "rvt-billboard--reverse"}">
+      <div class="rvt-billboard__image">
+        <img
+          src="${urlFor(feature.image).url()}"
+          alt="Replace this value with appropriate alternative text"
+        />
+      </div>
+      <div class="rvt-billboard__body">
+        <h2 class="rvt-billboard__title">
+          ${feature.title}
+        </h2>
+        <div class="rvt-billboard__content [ rvt-flow ]">
+          ${description}
+         
+        </div>
+      </div>
+    </div>
+  </div>`);
+      }
     });
   });
 };
@@ -69,7 +100,16 @@ const getCards = (page, cardType) => {
           /* optional object of custom components to use */
         },
       });
-      $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md ">
+      let url;
+      if (card?.link_type === "internal") {
+        url = card.i_url;
+      } else if (card?.link_type === "external") {
+        url = card.e_url;
+      } else {
+        url = null;
+      }
+      if (url !== null) {
+        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md ">
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
@@ -78,17 +118,39 @@ const getCards = (page, cardType) => {
             />
           </div>
           <div class="rvt-card__body">
-            <h2 class="rvt-card__title">
-              <a href="#">${card.title}</a>
+            <h2 class="rvt-card__title -rvt-m-bottom-xs">
+              <a href="#${url}">${card.title}</a>
             </h2>
             <div class="rvt-card__content [ rvt-flow ]">
-              <p>
+              <p class="-rvt-m-bottom-md">
                 ${description}
               </p>
             </div>
           </div>
         </div>
       </div>`);
+      } else {
+        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md ">
+        <div class="rvt-card">
+          <div class="rvt-card__image">
+            <img
+              src="${urlFor(card.image).url()}"
+              alt="Smiling students sitting outside on a bench"
+            />
+          </div>
+          <div class="rvt-card__body rvt-m-bottom-md">
+            <h2 class="rvt-card__title -rvt-m-bottom-xs">
+              ${card.title}
+            </h2>
+            <div class="rvt-card__content [ rvt-flow ] ">
+              <p class="-rvt-m-bottom-md">
+                ${description}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>`);
+      }
     });
   });
 };
@@ -123,7 +185,7 @@ const getProfiles = (page) => {
           <div class="rvt-card__body">
             <div class="rvt-card__eyebrow">${profile.role}</div>
             <h2 class="rvt-card__title">
-              <a href="#0">${profile.name}</a>
+            ${profile.name}
             </h2>
             <div class="rvt-card__content [ rvt-flow ]">
               ${bio}
@@ -173,8 +235,10 @@ const changePage = function (page, callback) {
       $("#app").empty();
       $("#app").append(data);
       getFeatures("home");
+      $("body").scrollTop(0);
     });
   } else if (page === "contact-us") {
+    $("body").scrollTop(0);
     $.get(`pages/contact-us/contact-us.html`, function (data) {
       $("#app").empty();
       $("#app").append(data);
@@ -200,9 +264,9 @@ const changePage = function (page, callback) {
     });
   } else {
     $.get(`pages/${page}/${page}.html`, function (data) {
-      console.log(page);
       $("#app").empty();
       $("#app").append(data);
+      $("body").scrollTop(0);
       if (page === "resources-equipment") {
         getCards(page, "equipment");
         getCards(page, "role");
