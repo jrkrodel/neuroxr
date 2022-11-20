@@ -22,15 +22,37 @@ const getFeatures = (page) => {
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
   </div>
   `);
-  const query = `*[_type == "feature" && page == "${page}"]`;
+  const query = `*[_type == "feature" && page == "${page}"] {
+    ...,
+     desc[] {
+       ...,
+       markDefs[] {
+         ...,
+         _type == "internalLink" => {
+         ...,
+         "file": @.item-> {
+         ...,
+         "url": file.asset->.url
+       }
+       }
+       }
+     }
+    }`;
+
+  const featureComponents = {
+    marks: {
+      internalLink: (props) => {
+        console.log(props);
+        return `<a href=${props.value.file.url}>${props.children}</a>`;
+      },
+    },
+  };
 
   client.fetch(query).then((features) => {
     $(`#${page}-features`).empty();
     features.forEach((feature, ind) => {
       const description = toHTML(feature.desc, {
-        components: {
-          /* optional object of custom components to use */
-        },
+        components: featureComponents,
       });
       let url;
       if (feature?.link_type === "internal") {
