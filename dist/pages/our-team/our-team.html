@@ -14,7 +14,7 @@
     <div class="red-box"></div>
     <h1 class="rvt-ts-lg">Our Team</h1>
     <!-- about paragraph -->
-    <p class="rvt-width-3-xl" style="text-align: center">
+    <p class="rvt-width-3-xl" style="text-align: center; margin-bottom: 3rem;">
       Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores alias
       impedit numquam itaque quisquam, ducimus accusantium quibusdam vitae! Rem
       voluptas earum cupiditate reiciendis omnis, itaque quaerat quibusdam
@@ -22,114 +22,63 @@
     </p>
   </div>
 
-  <!-- **********************************************************************
-        Filters
-    *********************************************************************** -->
-
+  <!-- Staff Cards -->
   <div class="rvt-container-lg">
-    <div
-      class="rvt-border-bottom rvt-p-top-lg rvt-p-top-xxl-md-up rvt-p-bottom-lg"
-    >
-      <div class="rvt-row rvt-row--loose">
-        <div class="rvt-cols-6-md rvt-m-top-lg rvt-m-top-none-md-up">
-          <label class="rvt-label" for="people-filter">Filter by search</label>
-          <input
-            type="text"
-            class="rvt-input"
-            id="people-filter"
-            placeholder="Type to filter list"
-          />
-        </div>
-        <div class="rvt-cols-6-md rvt-m-top-lg rvt-m-top-none-md-up">
-          <label class="rvt-label" for="alpha-filter">Filter last name</label>
-          <select name="" id="alpha-filter" class="rvt-select">
-            <option value="All">All</option>
-            <option value="A">A</option>
-            <option value="B">B</option>
-            <option value="C">C</option>
-            <option value="D">D</option>
-            <option value="E">E</option>
-            <option value="F">F</option>
-            <option value="G">G</option>
-            <option value="H">H</option>
-            <option value="I">I</option>
-            <option value="J">J</option>
-            <option value="K">K</option>
-            <option value="L">L</option>
-            <option value="M">M</option>
-            <option value="N">N</option>
-            <option value="O">O</option>
-            <option value="P">P</option>
-            <option value="Q">Q</option>
-            <option value="R">R</option>
-            <option value="S">S</option>
-            <option value="T">T</option>
-            <option value="U">U</option>
-            <option value="V">V</option>
-            <option value="W">W</option>
-            <option value="X">X</option>
-            <option value="Y">Y</option>
-            <option value="Z">Z</option>
-          </select>
-        </div>
-      </div>
-    </div>
+    <!-- Component wrapper -->
+<div class="rvt-flex rvt-items-center rvt-p-all-xl rvt-border-all rvt-border-radius rvt-shadow-subtle" style="margin-bottom: 3rem;">
+  <!-- Image -->
+  <img class="rvt-m-right-xl rvt-border-radius-circle" src="https://rivet.iu.edu/img/placeholder/avatar-1.jpg" alt="">
+  <!-- Content -->
+  <div class="rvt-prose">
+    <h2>Norval Ashton</h2>
+    <p>Norval Ashton is a writer and researcher from Bloomington, Indiana. They have won many awards.</p>
+    <a>test@iu.edu</a>
   </div>
+</div>
 
-  <!-- **********************************************************************
-      People list
-  *********************************************************************** -->
-
-  <div class="rvt-container-lg rvt-p-tb-xl">
-    <ul id="our-team-profiles" class="rvt-row rvt-row--loose">
-      <!-- **************************************************************
-              Profiles pulled from Sanity
-          *************************************************************** -->
-    </ul>
+<div class="rvt-flex rvt-items-center rvt-p-all-xl rvt-border-all rvt-border-radius rvt-shadow-subtle" style="margin-bottom: 3rem;">
+  <!-- Image -->
+  <img class="rvt-m-right-xl rvt-border-radius-circle" src="https://rivet.iu.edu/img/placeholder/avatar-1.jpg" alt="">
+  <!-- Content -->
+  <div class="rvt-prose">
+    <h2>Norval Ashton</h2>
+    <p>Norval Ashton is a writer and researcher from Bloomington, Indiana. They have won many awards.</p>
+    <a>test@iu.edu</a>
   </div>
+</div>
 
-  <!-- **********************************************************************
-      Pagination
-  *********************************************************************** -->
-
-  <div class="rvt-container-lg">
-    <div class="rvt-p-bottom-xxl rvt-flex rvt-justify-center">
-      <nav role="navigation" aria-label="Default results pages">
-        <ul class="rvt-pagination">
-          <li class="rvt-pagination__item is-disabled">
-            <a href="#0" aria-label="Previous set of pages">
-              <svg width="16" height="16" viewBox="0 0 16 16">
-                <path
-                  fill="currentColor"
-                  d="M10.5,15a1,1,0,0,1-.77-.36L4.87,8.8a1.25,1.25,0,0,1,0-1.61L9.73,1.36a1,1,0,0,1,1.54,1.28L6.8,8l4.47,5.36A1,1,0,0,1,10.5,15ZM6.41,8.47h0Zm0-1h0Z"
-                />
-              </svg>
-            </a>
-          </li>
-          <li class="rvt-pagination__item">
-            <a href="#0" aria-label="Page 1">1</a>
-          </li>
-          <li class="rvt-pagination__item">
-            <a href="#0" aria-current="page">2</a>
-          </li>
-          <li class="rvt-pagination__item">
-            <a href="#0" aria-label="Page 3">3</a>
-          </li>
-          <li class="rvt-pagination__item">
-            <a href="#0" aria-label="Page 4">4</a>
-          </li>
-          <li class="rvt-pagination__item">
-            <a href="#0">
-              <svg width="16" height="16" viewBox="0 0 16 16">
-                <path
-                  fill="currentColor"
-                  d="M5.5,15a1,1,0,0,1-.77-1.64L9.2,8,4.73,2.64A1,1,0,0,1,6.27,1.36L11.13,7.2a1.25,1.25,0,0,1,0,1.61L6.27,14.64A1,1,0,0,1,5.5,15ZM9.6,8.48h0Zm0-1h0Z"
-                />
-              </svg>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </div>
+<div class="rvt-flex rvt-items-center rvt-p-all-xl rvt-border-all rvt-border-radius rvt-shadow-subtle" style="margin-bottom: 3rem;">
+  <!-- Image -->
+  <img class="rvt-m-right-xl rvt-border-radius-circle" src="https://rivet.iu.edu/img/placeholder/avatar-1.jpg" alt="">
+  <!-- Content -->
+  <div class="rvt-prose">
+    <h2>Norval Ashton</h2>
+    <p>Norval Ashton is a writer and researcher from Bloomington, Indiana. They have won many awards.</p>
+    <a>test@iu.edu</a>
   </div>
+</div>
+
+<div class="rvt-flex rvt-items-center rvt-p-all-xl rvt-border-all rvt-border-radius rvt-shadow-subtle" style="margin-bottom: 3rem;">
+  <!-- Image -->
+  <img class="rvt-m-right-xl rvt-border-radius-circle" src="https://rivet.iu.edu/img/placeholder/avatar-1.jpg" alt="">
+  <!-- Content -->
+  <div class="rvt-prose">
+    <h2>Norval Ashton</h2>
+    <p>Norval Ashton is a writer and researcher from Bloomington, Indiana. They have won many awards.</p>
+    <a>test@iu.edu</a>
+  </div>
+</div>
+
+<div class="rvt-flex rvt-items-center rvt-p-all-xl rvt-border-all rvt-border-radius rvt-shadow-subtle" style="margin-bottom: 3rem;">
+  <!-- Image -->
+  <img class="rvt-m-right-xl rvt-border-radius-circle" src="https://rivet.iu.edu/img/placeholder/avatar-1.jpg" alt="">
+  <!-- Content -->
+  <div class="rvt-prose">
+    <h2>Norval Ashton</h2>
+    <p>Norval Ashton is a writer and researcher from Bloomington, Indiana. They have won many awards.</p>
+    <a>test@iu.edu</a>
+  </div>
+</div>
+  </div>
+ 
 </main>
