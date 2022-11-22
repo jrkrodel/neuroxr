@@ -55,9 +55,9 @@ const getFeatures = (page) => {
         components: featureComponents,
       });
       let url;
-      if (feature?.link_type === "internal") {
+      if (feature?.link_type === "internal" && feature.i_url) {
         url = feature.i_url;
-      } else if (feature?.link_type === "external") {
+      } else if (feature?.link_type === "external" && feature.e_url) {
         url = feature.e_url;
       } else {
         url = null;
@@ -123,9 +123,9 @@ const getCards = (page, cardType) => {
         },
       });
       let url;
-      if (card?.link_type === "internal") {
+      if (card?.link_type === "internal" && card.i_url) {
         url = card.i_url;
-      } else if (card?.link_type === "external") {
+      } else if (card?.link_type === "external" && card.e_url) {
         url = card.e_url;
       } else {
         url = null;
