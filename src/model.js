@@ -257,7 +257,7 @@ const getResearch = (page) => {
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
   </div>
   `);
-  const query = `*[_type == "research_doc"] {
+  const query = `*[_type == "research_doc" && featured == true] {
     ...,
     "doc_url": file.asset->url
   }`;
