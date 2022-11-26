@@ -203,8 +203,9 @@ const getProfiles = (page) => {
       });
       if (profile.role === "directors") {
         $(`#${page}-profiles`).append(`
+     
         <div
-        class="rvt-flex rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-xl  rvt-border-all rvt-border-radius rvt-m-bottom-xl"
+        class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
       >
         <!-- Image -->
         <img
@@ -214,11 +215,13 @@ const getProfiles = (page) => {
         />
         <!-- Content -->
         <div>
+        <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
           <h2>${profile.name}</h2>
           ${bio}
-          <p>${profile.email}</p>
+          <p class="rvt-ts-xxs">${profile.email}</p>
         </div>
-      </div>`);
+      </div>
+      `);
       }
     });
   });
@@ -255,6 +258,7 @@ const getProfilesByType = (page, profileType) => {
         />
         <!-- Content -->
         <div class="rvt-prose">
+        <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
           <h2>${profile.name}</h2>
           ${bio}
           <p>${profile.email}</p>
