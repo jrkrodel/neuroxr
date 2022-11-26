@@ -17,12 +17,13 @@ function urlFor(source) {
 }
 
 const getFeatures = (page) => {
+  $(`#${page}-features`).empty();
   $(`#${page}-features`).append(`
   <div class="rvt-flex rvt-justify-center rvt-p-all-xxl rvt-items-center">
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
   </div>
   `);
-  const query = `*[_type == "feature" && page == "${page}"] {
+  const query = `*[_type == "feature" && page == "${page}"] | order(order) {
     ...,
      desc[] {
        ...,
@@ -55,12 +56,22 @@ const getFeatures = (page) => {
         components: featureComponents,
       });
       let url;
+      let featureContent;
       if (feature?.link_type === "internal" && feature.i_url) {
         url = feature.i_url;
       } else if (feature?.link_type === "external" && feature.e_url) {
         url = feature.e_url;
       } else {
         url = null;
+      }
+      if (feature.contentType === "video") {
+        featureContent = `<div class="rvt-flex">
+        <iframe width="100%" height="315" frameBorder="0" src="${feature.video}" title="video"></iframe></div>`;
+      } else {
+        featureContent = `    <img
+        src="${urlFor(feature.image).url()}"
+        alt="${feature.altText}"
+      />`;
       }
       if (url !== null) {
         $(`#${page}-features`)
@@ -69,10 +80,7 @@ const getFeatures = (page) => {
         ind % 2 == 0 ? "" : "rvt-billboard--reverse"
       }">
         <div class="rvt-billboard__image">
-          <img
-            src="${urlFor(feature.image).url()}"
-            alt="Replace this value with appropriate alternative text"
-          />
+          ${featureContent}
         </div>
         <div class="rvt-billboard__body">
           <h2 class="rvt-billboard__title">
@@ -90,10 +98,7 @@ const getFeatures = (page) => {
           .append(`<div class="rvt-container-lg rvt-p-tb-xl rvt-p-tb-3-xl-md-up">
     <div class="rvt-billboard ${ind % 2 == 0 ? "" : "rvt-billboard--reverse"}">
       <div class="rvt-billboard__image">
-        <img
-          src="${urlFor(feature.image).url()}"
-          alt="Replace this value with appropriate alternative text"
-        />
+        ${featureContent}
       </div>
       <div class="rvt-billboard__body">
         <h2 class="rvt-billboard__title">
@@ -112,7 +117,8 @@ const getFeatures = (page) => {
 };
 
 const getCards = (page, cardType) => {
-  const query = `*[_type == "card" && type == "${cardType}"]`;
+  $(`#${page}-${cardType}Cards`).empty();
+  const query = `*[_type == "card" && type == "${cardType}"] | order(order)`;
 
   client.fetch(query).then((cards) => {
     $(`#${page}-${cardType}Cards`).empty();
@@ -178,80 +184,87 @@ const getCards = (page, cardType) => {
 };
 
 const getProfiles = (page) => {
+  $(`#${page}-profiles`).empty();
   $(`#${page}-profiles`).append(`
-  <div class="rvt-flex rvt-justify-center rvt-p-all-xxl rvt-items-center">
+  <div class="rvt-flex rvt-justify-center rvt-p-all-3-xl   rvt-items-center">
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
   </div>
   `);
-  const query = `*[_type == "profile"]`;
+  const query = `*[_type == "profile" && role == "directors"]`;
 
   client.fetch(query).then((profiles) => {
     $(`#${page}-profiles`).empty();
-    $(`#${page}-profiles`).addClass("rvt-row rvt-row--loose");
+    $(`#${page}-profiles`).addClass("rvt-container-lg rvt-p-top-sm");
     profiles.forEach((profile, ind) => {
       const bio = toHTML(profile.bio, {
         components: {
           /* optional object of custom components to use */
         },
       });
-      $(`#${page}-profiles`).append(`
-        <li class="rvt-cols-6-md rvt-cols-4-lg [ rvt-flex rvt-m-bottom-xxl ]">
-        <div class="rvt-card">
-          <div class="rvt-avatar rvt-avatar--lg">
-            <img
-              class="rvt-avatar__image"
-              src="${urlFor(profile.image).url()}"
-              alt=""
-            />
-          </div>
-          <div class="rvt-card__body">
-            <div class="rvt-card__eyebrow">${profile.role}</div>
-            <h2 class="rvt-card__title">
-            ${profile.name}
-            </h2>
-            <div class="rvt-card__content [ rvt-flow ]">
-              ${bio}
-            </div>
-            <div class="rvt-card__meta">
-              <div class="rvt-flex rvt-items-center">
-                <svg
-                  class="rvt-color-black-400 rvt-m-right-xs"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                  aria-hidden="true"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M16,12.8A3.2,3.2,0,0,1,12.8,16,12.8,12.8,0,0,1,0,3.2,3.2,3.2,0,0,1,3.2,0a3,3,0,0,1,.54,0,2.84,2.84,0,0,1,.53.14l1.2,5.27-1.73.9a9.55,9.55,0,0,0,5.91,5.91l.91-1.74,5.26,1.22a2.84,2.84,0,0,1,.14.53A3,3,0,0,1,16,12.8Z"
-                  />
-                </svg>
-                <p class="rvt-m-all-none">${profile.phone}</p>
-              </div>
-              <div class="rvt-flex rvt-items-center rvt-m-top-xs">
-                <svg
-                  class="rvt-color-black-400 rvt-m-right-xs"
-                  aria-hidden="true"
-                  width="16"
-                  height="16"
-                  viewBox="0 0 16 16"
-                >
-                  <path
-                    fill="currentColor"
-                    d="M13.5,3H2.5A1.5,1.5,0,0,0,1,4.5v8A1.5,1.5,0,0,0,2.5,14h11A1.5,1.5,0,0,0,15,12.5v-8A1.5,1.5,0,0,0,13.5,3ZM11.41,5,8,7.77,4.59,5ZM3,12V6.29L7.11,9.62l.12.08a1.5,1.5,0,0,0,1.54,0L13,6.29V12Z"
-                  />
-                </svg>
-                <a href="#0">${profile.email}</a>
-              </div>
-            </div>
-          </div>
+      if (profile.role === "directors") {
+        $(`#${page}-profiles`).append(`
+        <div
+        class="rvt-flex rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-xl  rvt-border-all rvt-border-radius rvt-m-bottom-xl"
+      >
+        <!-- Image -->
+        <img
+        class="rvt-m-right-xl-md-up rvt-border-radius-circle"
+          src="${urlFor(profile.image).url()}"
+          alt="${profile.alt}"
+        />
+        <!-- Content -->
+        <div>
+          <h2>${profile.name}</h2>
+          ${bio}
+          <p>${profile.email}</p>
         </div>
-      </li>`);
+      </div>`);
+      }
     });
   });
 };
 
+const getProfilesByType = (page, profileType) => {
+  $(`#${page}-profiles`).empty();
+  $(`#${page}-profiles`).append(`
+  <div class="rvt-flex rvt-justify-center rvt-p-all-3-xl  rvt-items-center">
+    <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
+  </div>
+  `);
+  const query = `*[_type == "profile" && role == "${profileType}"]`;
+
+  client.fetch(query).then((profiles) => {
+    $(`#${page}-profiles`).empty();
+    $(`#${page}-profiles`).addClass("rvt-container-lg rvt-p-top-sm");
+    profiles.forEach((profile, ind) => {
+      const bio = toHTML(profile.bio, {
+        components: {
+          /* optional object of custom components to use */
+        },
+      });
+
+      $(`#${page}-profiles`).append(`
+        <div
+        class="rvt-flex rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-xl rvt-border-all rvt-border-radius rvt-shadow-subtle rvt-m-bottom-xl"
+      >
+        <!-- Image -->
+        <img
+        class="rvt-m-right-xl-md-up rvt-border-radius-circle"
+          src="${urlFor(profile.image).url()}"
+          alt="${profile.alt}"
+        />
+        <!-- Content -->
+        <div class="rvt-prose">
+          <h2>${profile.name}</h2>
+          ${bio}
+          <p>${profile.email}</p>
+        </div>
+      </div>`);
+    });
+  });
+};
 const getResearch = (page) => {
+  $(`#${page}-research`).empty();
   $(`#${page}-research`).append(`
   <div class="rvt-flex rvt-justify-center rvt-p-all-xxl rvt-items-center">
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
@@ -302,15 +315,20 @@ const changePage = function (page, callback) {
         const form = $(this).serialize();
         const actionUrl = $(this).attr("action");
 
-        console.log(form);
-
         $.ajax({
           type: "POST",
           url: actionUrl,
           data: form, // serializes the form's elements.
           success: function (result) {
+            $("#fname").val("");
+            $("#lname").val("");
+            $("#email").val("");
+            $("#subject").val("");
+            $("#message").val("");
             if (result !== "sent") {
-              console.log(result);
+              $("#submit").val("Error Occured, please try again");
+            } else {
+              $("#submit").val("Message Sent!");
             }
           },
         });
@@ -328,6 +346,12 @@ const changePage = function (page, callback) {
         getCards(page, "sRole");
       } else if (page === "our-team") {
         getProfiles(page);
+        $(".rvt-subnav a").click(function (e) {
+          $(".rvt-subnav a").removeAttr("aria-current");
+
+          getProfilesByType(page, e.currentTarget.id);
+          e.currentTarget.setAttribute("aria-current", "page");
+        });
       } else if (page === "our-research") {
         getResearch(page);
       }

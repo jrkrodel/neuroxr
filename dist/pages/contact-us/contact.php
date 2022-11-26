@@ -92,6 +92,7 @@
           $body = " Name: $fName $lName\n E-mail: $email\n Role: $role\n Message:\n $message";
           if(mail($to, $subject, $body)){
             echo 'sent';
+            mail($email, "Thank you for your message", "Thank you for messaging NeuroXR! We have recieved your inquiry and will respond as soon as possible.");
             return;
           }else{
             echo 'Error Here';
