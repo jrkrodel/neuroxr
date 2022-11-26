@@ -218,7 +218,7 @@ const getProfiles = (page) => {
         <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
           <h2>${profile.name}</h2>
           ${bio}
-          <p class="rvt-ts-xxs">${profile.email}</p>
+          <p class="rvt-ts-xs-md-up rvt-ts-xxs">${profile.email}</p>
         </div>
       </div>
       `);
