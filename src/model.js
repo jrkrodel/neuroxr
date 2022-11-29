@@ -31,7 +31,7 @@ const getFeatures = (page) => {
          ...,
          _type == "internalLink" => {
          ...,
-         "file": @.item-> {
+         "file": @.doc-> {
          ...,
          "url": file.asset->.url
        }
@@ -44,7 +44,7 @@ const getFeatures = (page) => {
     marks: {
       internalLink: (props) => {
         console.log(props);
-        return `<a href=${props.value.file.url}>${props.children}</a>`;
+        return `<a target="blank_" href=${props.value.file.url}>${props.children}</a>`;
       },
     },
   };
@@ -68,9 +68,10 @@ const getFeatures = (page) => {
         featureContent = `<div class="rvt-flex">
         <iframe width="100%" height="315" frameBorder="0" src="${feature.video}" title="video"></iframe></div>`;
       } else {
-        featureContent = `    <img
+        featureContent = `    
+        <img
         src="${urlFor(feature.image).url()}"
-        alt="${feature.altText}"
+        alt="${feature.alt}"
       />`;
       }
       if (url !== null) {
@@ -106,7 +107,6 @@ const getFeatures = (page) => {
         </h2>
         <div class="rvt-billboard__content [ rvt-flow ]">
           ${description}
-         
         </div>
       </div>
     </div>
@@ -118,15 +118,37 @@ const getFeatures = (page) => {
 
 const getCards = (page, cardType) => {
   $(`#${page}-${cardType}Cards`).empty();
-  const query = `*[_type == "card" && type == "${cardType}"] | order(order)`;
+  const query = `*[_type == "card" && type == "${cardType}"] | order(order) {
+    ...,
+     desc[] {
+       ...,
+       markDefs[] {
+         ...,
+         _type == "internalLink" => {
+         ...,
+         "file": @.doc-> {
+         ...,
+         "url": file.asset->.url
+       }
+       }
+       }
+     }
+    }`;
+
+  const cardComponents = {
+    marks: {
+      internalLink: (props) => {
+        console.log(props);
+        return `<a target="blank_" href=${props.value.file.url}>${props.children}</a>`;
+      },
+    },
+  };
 
   client.fetch(query).then((cards) => {
     $(`#${page}-${cardType}Cards`).empty();
     cards.forEach((card, ind) => {
       const description = toHTML(card.desc, {
-        components: {
-          /* optional object of custom components to use */
-        },
+        components: cardComponents,
       });
       let url;
       if (card?.link_type === "internal" && card.i_url) {
@@ -137,15 +159,15 @@ const getCards = (page, cardType) => {
         url = null;
       }
       if (url !== null) {
-        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md ">
+        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md">
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
               src="${urlFor(card.image).url()}"
-              alt="Smiling students sitting outside on a bench"
+              alt="${card.alt}"
             />
           </div>
-          <div class="rvt-card__body">
+          <div class="rvt-card__body rvt-m-bottom-md">
             <h2 class="rvt-card__title -rvt-m-bottom-xs">
               <a href="#${url}">${card.title}</a>
             </h2>
@@ -158,12 +180,12 @@ const getCards = (page, cardType) => {
         </div>
       </div>`);
       } else {
-        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md ">
+        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md"">
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
               src="${urlFor(card.image).url()}"
-              alt="Smiling students sitting outside on a bench"
+              alt="${card.alt}"
             />
           </div>
           <div class="rvt-card__body rvt-m-bottom-md">
@@ -183,14 +205,14 @@ const getCards = (page, cardType) => {
   });
 };
 
-const getProfiles = (page) => {
+const getProfiles = (page, profileType) => {
   $(`#${page}-profiles`).empty();
   $(`#${page}-profiles`).append(`
-  <div class="rvt-flex rvt-justify-center rvt-p-all-3-xl   rvt-items-center">
+  <div class="rvt-flex rvt-justify-center rvt-p-top-3-xl rvt-items-center">
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
   </div>
   `);
-  const query = `*[_type == "profile" && role == "directors"]`;
+  const query = `*[_type == "profile" && role == "${profileType}"]`;
 
   client.fetch(query).then((profiles) => {
     $(`#${page}-profiles`).empty();
@@ -201,9 +223,9 @@ const getProfiles = (page) => {
           /* optional object of custom components to use */
         },
       });
-      if (profile.role === "directors") {
-        $(`#${page}-profiles`).append(`
-     
+
+      $(`#${page}-profiles`).append(`
+
         <div
         class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
       >
@@ -222,51 +244,10 @@ const getProfiles = (page) => {
         </div>
       </div>
       `);
-      }
     });
   });
 };
 
-const getProfilesByType = (page, profileType) => {
-  $(`#${page}-profiles`).empty();
-  $(`#${page}-profiles`).append(`
-  <div class="rvt-flex rvt-justify-center rvt-p-all-3-xl  rvt-items-center">
-    <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
-  </div>
-  `);
-  const query = `*[_type == "profile" && role == "${profileType}"]`;
-
-  client.fetch(query).then((profiles) => {
-    $(`#${page}-profiles`).empty();
-    $(`#${page}-profiles`).addClass("rvt-container-lg rvt-p-top-sm");
-    profiles.forEach((profile, ind) => {
-      const bio = toHTML(profile.bio, {
-        components: {
-          /* optional object of custom components to use */
-        },
-      });
-
-      $(`#${page}-profiles`).append(`
-        <div
-        class="rvt-flex rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-xl rvt-border-all rvt-border-radius rvt-shadow-subtle rvt-m-bottom-xl"
-      >
-        <!-- Image -->
-        <img
-        class="rvt-m-right-xl-md-up rvt-border-radius-circle"
-          src="${urlFor(profile.image).url()}"
-          alt="${profile.alt}"
-        />
-        <!-- Content -->
-        <div class="rvt-prose">
-        <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
-          <h2>${profile.name}</h2>
-          ${bio}
-          <p>${profile.email}</p>
-        </div>
-      </div>`);
-    });
-  });
-};
 const getResearch = (page) => {
   $(`#${page}-research`).empty();
   $(`#${page}-research`).append(`
@@ -349,11 +330,11 @@ const changePage = function (page, callback) {
       } else if (page === "get-involved") {
         getCards(page, "sRole");
       } else if (page === "our-team") {
-        getProfiles(page);
+        getProfiles(page, "directors");
         $(".rvt-subnav a").click(function (e) {
           $(".rvt-subnav a").removeAttr("aria-current");
 
-          getProfilesByType(page, e.currentTarget.id);
+          getProfiles(page, e.currentTarget.id);
           e.currentTarget.setAttribute("aria-current", "page");
         });
       } else if (page === "our-research") {
