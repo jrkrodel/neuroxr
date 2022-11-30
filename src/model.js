@@ -159,7 +159,7 @@ const getCards = (page, cardType) => {
         url = null;
       }
       if (url !== null) {
-        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md">
+        $(`#${page}-${cardType}Cards`).append(`<div class="cardTest">
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
@@ -180,7 +180,7 @@ const getCards = (page, cardType) => {
         </div>
       </div>`);
       } else {
-        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-4-md"">
+        $(`#${page}-${cardType}Cards`).append(`<div class="cardTest"">
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img

@@ -25,6 +25,21 @@ p {
   min-height: 100vh;
 }
 
+.cardTest {
+  flex: 1 1 20rem;
+  margin: 15px;
+}
+
+.cardImage {
+  border-radius: 15px;
+}
+
+.cardContainerTest {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 /* Colors */
 :root {
   --dark-red: #990000;
