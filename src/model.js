@@ -169,7 +169,7 @@ const getCards = (page, cardType) => {
           </div>
           <div class="rvt-card__body rvt-m-bottom-md">
             <h2 class="rvt-card__title -rvt-m-bottom-xs">
-              <a href="#${url}">${card.title}</a>
+              <a href="${url}">${card.title}</a>
             </h2>
             <div class="rvt-card__content [ rvt-flow ]">
               <p class="-rvt-m-bottom-md">
