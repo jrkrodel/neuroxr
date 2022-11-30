@@ -25,16 +25,12 @@ p {
   min-height: 100vh;
 }
 
-.cardTest {
+.cardCustom {
   flex: 1 1 20rem;
   margin: 15px;
 }
 
-.cardImage {
-  border-radius: 15px;
-}
-
-.cardContainerTest {
+.cardContainer {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
