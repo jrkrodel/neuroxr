@@ -205,26 +205,58 @@ const getCards = (page, cardType) => {
   });
 };
 
-const getProfiles = (page, profileType) => {
+const getProfiles = (page, type) => {
   $(`#${page}-profiles`).empty();
   $(`#${page}-profiles`).append(`
   <div class="rvt-flex rvt-justify-center rvt-p-top-3-xl rvt-items-center">
     <div class="rvt-loader rvt-loader--xl" aria-label="Content loading"></div>
   </div>
   `);
-  const query = `*[_type == "profile" && role == "${profileType}"]`;
+  const query = `*[_type == "profile_type"] | order(order)`;
+  client
+    .fetch(query)
+    .then((items) => {
+      $(`#profile-profileTypes`).empty();
+      items.forEach((item, ind) => {
+        console.log(ind);
+        if (item.slug.current === type) {
+          $(`#profile-profileTypes`).append(`
+      <li class="rvt-subnav__item">
+        <a aria-current="page" id="${item.slug.current}" href="#/our-team">${item.title}</a>
+      </li>`);
+        } else {
+          $(`#profile-profileTypes`).append(`
+        <li class="rvt-subnav__item">
+          <a id="${item.slug.current}" href="#/our-team">${item.title}</a>
+        </li>`);
+        }
+      });
+    })
+    .then(() => {
+      $(".rvt-subnav a").click(function (e) {
+        e.preventDefault();
+        $(".rvt-subnav a").removeAttr("aria-current");
+        getProfiles(page, e.currentTarget.id);
+        e.currentTarget.setAttribute("aria-current", "page");
+      });
+    });
 
-  client.fetch(query).then((profiles) => {
+  const queryProfiles = `*[_type == "profile" && role->.slug.current == "${type}"] | order(order)`;
+
+  client.fetch(queryProfiles).then((profiles) => {
     $(`#${page}-profiles`).empty();
     $(`#${page}-profiles`).addClass("rvt-container-lg rvt-p-top-sm");
-    profiles.forEach((profile, ind) => {
-      const bio = toHTML(profile.bio, {
-        components: {
-          /* optional object of custom components to use */
-        },
-      });
+    const alumniProfiles = [];
+    if (profiles.length > 0) {
+      profiles.forEach((profile, ind) => {
+        if (profile.alumni === false) {
+          const bio = toHTML(profile.bio, {
+            components: {
+              /* optional object of custom components to use */
+            },
+          });
 
-      $(`#${page}-profiles`).append(`
+          $(`#${page}-profiles`).append(`
 
         <div
         class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
@@ -244,7 +276,49 @@ const getProfiles = (page, profileType) => {
         </div>
       </div>
       `);
-    });
+        } else {
+          alumniProfiles.push(profile);
+        }
+      });
+      if (alumniProfiles.length > 0) {
+        $(`#${page}-profiles`).append(`
+        <div class="rvt-container-xxl">
+          <h1 class="rvt-ts-lg rvt-border-bottom">Alumni</h1>
+        </div>`);
+        alumniProfiles.forEach((profile) => {
+          const bio = toHTML(profile.bio, {
+            components: {
+              /* optional object of custom components to use */
+            },
+          });
+
+          $(`#${page}-profiles`).append(`
+
+        <div
+        class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
+      >
+        <!-- Image -->
+        <img
+        class="rvt-m-right-xl-md-up rvt-border-radius-circle"
+          src="${urlFor(profile.image).url()}"
+          alt="${profile.alt}"
+        />
+        <!-- Content -->
+        <div>
+        <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
+          <h2>${profile.name}</h2>
+          ${bio}
+          <p class="rvt-ts-xs-md-up rvt-ts-xxs">${profile.email}</p>
+        </div>
+      </div>
+      `);
+        });
+      }
+    } else {
+      $(`#${page}-profiles`).append(`
+          <h1>No Profiles Found</h1>        
+        `);
+    }
   });
 };
 
@@ -326,16 +400,12 @@ const changePage = function (page, callback) {
       $("body").scrollTop(0);
       if (page === "resources-equipment") {
         getCards(page, "equipment");
-        getCards(page, "role");
       } else if (page === "get-involved") {
         getCards(page, "sRole");
       } else if (page === "our-team") {
-        getProfiles(page, "directors");
-        $(".rvt-subnav a").click(function (e) {
-          $(".rvt-subnav a").removeAttr("aria-current");
-
-          getProfiles(page, e.currentTarget.id);
-          e.currentTarget.setAttribute("aria-current", "page");
+        const query = `*[_type == "profile_type" && order == 1]`;
+        client.fetch(query).then((item) => {
+          getProfiles(page, item[0].slug.current);
         });
       } else if (page === "our-research") {
         getResearch(page);
