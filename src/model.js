@@ -336,13 +336,17 @@ const getResearch = (page) => {
 
   client.fetch(query).then((research) => {
     $(`#${page}-research`).empty();
-    research.forEach((doc, ind) => {
-      const description = toHTML(doc.description, {
-        components: {
-          /* optional object of custom components to use */
-        },
-      });
-      $(`#${page}-research`).append(`  
+    if (research.length > 0) {
+      $(`#${page}-research`).append(
+        `<h1 class="rvt-ts-lg">More of our Research</h1>`
+      );
+      research.forEach((doc, ind) => {
+        const description = toHTML(doc.description, {
+          components: {
+            /* optional object of custom components to use */
+          },
+        });
+        $(`#${page}-research`).append(`  
       <li class="rvt-link-hub__item">
       <a class="rvt-link-hub__link" target="_blank" href="${doc.doc_url}">
         <span class="rvt-link-hub__text">${doc.title}</span>
@@ -351,7 +355,8 @@ const getResearch = (page) => {
         >
       </a>
     </li>`);
-    });
+      });
+    }
   });
 };
 
@@ -388,6 +393,9 @@ const changePage = function (page, callback) {
               $("#submit").val("Error Occured, please try again");
             } else {
               $("#submit").val("Message Sent!");
+              setTimeout(() => {
+                $("#submit").val("Submit");
+              }, "10000");
             }
           },
         });
