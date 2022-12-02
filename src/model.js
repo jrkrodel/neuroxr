@@ -243,6 +243,15 @@ const getProfiles = (page, type) => {
 
   const queryProfiles = `*[_type == "profile" && role->.slug.current == "${type}"] | order(order)`;
 
+  const profileComponents = {
+    marks: {
+      profileLink: (props) => {
+        console.log(props);
+        return `<a href="${props.value.url}" class="rvt-cta">${props.text}</a>`;
+      },
+    },
+  };
+
   client.fetch(queryProfiles).then((profiles) => {
     $(`#${page}-profiles`).empty();
     $(`#${page}-profiles`).addClass("rvt-container-lg rvt-p-top-sm");
@@ -251,9 +260,7 @@ const getProfiles = (page, type) => {
       profiles.forEach((profile, ind) => {
         if (profile.alumni === false) {
           const bio = toHTML(profile.bio, {
-            components: {
-              /* optional object of custom components to use */
-            },
+            components: profileComponents,
           });
 
           $(`#${page}-profiles`).append(`
@@ -287,9 +294,7 @@ const getProfiles = (page, type) => {
         </div>`);
         alumniProfiles.forEach((profile) => {
           const bio = toHTML(profile.bio, {
-            components: {
-              /* optional object of custom components to use */
-            },
+            components: profileComponents,
           });
 
           $(`#${page}-profiles`).append(`
