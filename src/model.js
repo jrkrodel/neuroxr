@@ -159,7 +159,7 @@ const getCards = (page, cardType) => {
         url = null;
       }
       if (url !== null) {
-        $(`#${page}-${cardType}Cards`).append(`<div class="cardCustom">
+        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-6-md">
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
@@ -180,7 +180,7 @@ const getCards = (page, cardType) => {
         </div>
       </div>`);
       } else {
-        $(`#${page}-${cardType}Cards`).append(`<div class="cardCustom"">
+        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-6-md">
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
@@ -202,6 +202,54 @@ const getCards = (page, cardType) => {
       </div>`);
       }
     });
+    if (page === "resources-equipment") {
+      if (cards.length % 2 !== 0) {
+        $(`#${page}-${cardType}Cards`).append(`
+      <div class="rvt-cols-6-md">
+      <div class="rvt-card">
+        <div class="rvt-card__image">
+          <img
+            src="https://cdn.sanity.io/images/0m0o2jn4/production/8ae169f437fdef26baf19b07b16330f76a3e1af3-800x450.jpg"
+            alt="test"
+          />
+        </div>
+        <div class="rvt-card__body rvt-m-bottom-md">
+          <h2 class="rvt-card__title -rvt-m-bottom-xs">
+            More to come?
+          </h2>
+          <div class="rvt-card__content [ rvt-flow ] ">
+            <p class="-rvt-m-bottom-md">
+              We are also looking to obtain more resources, so check back soon and you may find more!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>`);
+      }
+    } else if (page === "get-involved") {
+      if (cards.length % 2 !== 0) {
+        $(`#${page}-${cardType}Cards`).append(`<div class="rvt-cols-6-md">
+      <div class="rvt-card">
+        <div class="rvt-card__image">
+          <img
+            src="https://cdn.sanity.io/images/0m0o2jn4/production/8ae169f437fdef26baf19b07b16330f76a3e1af3-800x450.jpg"
+            alt="test"
+          />
+        </div>
+        <div class="rvt-card__body rvt-m-bottom-md">
+          <h2 class="rvt-card__title -rvt-m-bottom-xs">
+            <a href="#/contact-us}">Don't see a role that fits?</a>
+          </h2>
+          <div class="rvt-card__content [ rvt-flow ]">
+            <p class="-rvt-m-bottom-md">
+             Still go ahead contact us and let us know you are interested!
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>`);
+      }
+    }
   });
 };
 
