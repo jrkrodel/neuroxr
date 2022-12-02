@@ -316,7 +316,10 @@ const getProfiles = (page, type) => {
         <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
           <h2>${profile.name}</h2>
           ${bio}
-          <p class="rvt-ts-xs-md-up rvt-ts-xxs">${profile.email}</p>
+          <a class="rvt-ts-xs-md-up rvt-ts-xxs" href="mailto:${
+            profile.email
+          }">${profile.email}</a>
+
         </div>
       </div>
       `);
