@@ -38,6 +38,25 @@ p {
   justify-content: space-between;
 }
 
+/* .home-tab-image {
+  width: 100%;
+  height: 20rem;
+} */
+
+/* .tab-image {
+  height: ;
+} */
+
+/* .tabContainer {
+  background-image: url("../assests//HOME_Development.jpg");
+  background-position: 50% 15%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  margin: 0 auto;
+  height: 25rem;
+  width: 50rem;
+} */
+
 /* Colors */
 :root {
   --dark-red: #990000;

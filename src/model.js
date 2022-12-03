@@ -75,7 +75,7 @@ const getFeatures = (page) => {
       } else {
         featureContent = `    
         <img
-        src="${urlFor(feature.image).url()}"
+        src="${urlFor(feature.image).height(375).width(575).url()}"
         alt="${feature.alt}"
       />`;
       }
@@ -124,6 +124,7 @@ const getFeatures = (page) => {
 const getCards = (page, cardType) => {
   $(`#${page}-${cardType}Cards`).empty();
   const query = `*[_type == "card" && type == "${cardType}"] | order(order) {
+    "imageAsset": image.asset->,
     ...,
      desc[] {
        ...,
@@ -157,6 +158,7 @@ const getCards = (page, cardType) => {
   client.fetch(query).then((cards) => {
     $(`#${page}-${cardType}Cards`).empty();
     cards.forEach((card, ind) => {
+      console.log(card);
       const description = toHTML(card.desc, {
         components: cardComponents,
       });
@@ -173,7 +175,7 @@ const getCards = (page, cardType) => {
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
-              src="${urlFor(card.image).url()}"
+              src="${urlFor(card.image).width(530).height(300).url()}"
               alt="${card.alt}"
             />
           </div>
@@ -194,7 +196,7 @@ const getCards = (page, cardType) => {
         <div class="rvt-card">
           <div class="rvt-card__image">
             <img
-              src="${urlFor(card.image).url()}"
+              src="${urlFor(card.image).width(530).height(300).url()}"
               alt="${card.alt}"
             />
           </div>
@@ -329,7 +331,7 @@ const getProfiles = (page, type) => {
         <!-- Image -->
         <img
         class="rvt-m-right-xl-md-up rvt-border-radius-circle"
-          src="${urlFor(profile.image).url()}"
+          src="${urlFor(profile.image).width(165).height(165).url()}"
           alt="${profile.alt}"
         />
         <!-- Content -->
@@ -366,7 +368,7 @@ const getProfiles = (page, type) => {
         <!-- Image -->
         <img
         class="rvt-m-right-xl-md-up rvt-border-radius-circle"
-          src="${urlFor(profile.image).url()}"
+          src="${urlFor(profile.image).width(165).height(165).url()}"
           alt="${profile.alt}"
         />
         <!-- Content -->
