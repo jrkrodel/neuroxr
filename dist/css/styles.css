@@ -59,7 +59,7 @@ p {
 .home-hero {
   width: 159px;
   height: 159px;
-  background-color: var(--dark-red);
+  /* background-color: var(--dark-red); */
 }
 
 .goal-icon {
