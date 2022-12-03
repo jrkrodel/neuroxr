@@ -43,8 +43,13 @@ const getFeatures = (page) => {
   const featureComponents = {
     marks: {
       internalLink: (props) => {
-        console.log(props);
-        return `<a target="blank_" href=${props.value.file.url}>${props.children}</a>`;
+        if (props.value.file) {
+          if (props.value.file.url) {
+            return `<a target="blank_" href=${props.value.file.url}>${props.children}</a>`;
+          }
+        } else {
+          return `${props.children}`;
+        }
       },
     },
   };
@@ -138,8 +143,13 @@ const getCards = (page, cardType) => {
   const cardComponents = {
     marks: {
       internalLink: (props) => {
-        console.log(props);
-        return `<a target="blank_" href=${props.value.file.url}>${props.children}</a>`;
+        if (props.value.file) {
+          if (props.value.file.url) {
+            return `<a target="blank_" href=${props.value.file.url}>${props.children}</a>`;
+          }
+        } else {
+          return `${props.children}`;
+        }
       },
     },
   };
