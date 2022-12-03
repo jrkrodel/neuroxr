@@ -226,7 +226,7 @@ const getCards = (page, cardType) => {
         </div>
         <div class="rvt-card__body rvt-m-bottom-md">
           <h2 class="rvt-card__title -rvt-m-bottom-xs">
-            More to come?
+            More to come!
           </h2>
           <div class="rvt-card__content [ rvt-flow ] ">
             <p class="-rvt-m-bottom-md">
