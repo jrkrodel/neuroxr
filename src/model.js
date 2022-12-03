@@ -335,7 +335,9 @@ const getProfiles = (page, type) => {
         />
         <!-- Content -->
         <div>
-        <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
+        <div class="rvt-card__eyebrow">${
+          profile.roleTitle ? profile.roleTitle : ""
+        }</div>
           <h2>${profile.name}</h2>
           ${bio}
           <a class="rvt-ts-xs-md-up rvt-ts-xxs" href="mailto:${
@@ -372,7 +374,9 @@ const getProfiles = (page, type) => {
         />
         <!-- Content -->
         <div>
-        <div class="rvt-card__eyebrow">${profile.roleTitle}</div>
+        <div class="rvt-card__eyebrow">${
+          profile.roleTitle ? profile.roleTitle : ""
+        }</div>
           <h2>${profile.name}</h2>
           ${bio}
           <a class="rvt-ts-xs-md-up rvt-ts-xxs" href="mailto:${
