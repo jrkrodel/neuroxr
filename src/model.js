@@ -124,7 +124,6 @@ const getFeatures = (page) => {
 const getCards = (page, cardType) => {
   $(`#${page}-${cardType}Cards`).empty();
   const query = `*[_type == "card" && type == "${cardType}"] | order(order) {
-    "imageAsset": image.asset->,
     ...,
      desc[] {
        ...,
