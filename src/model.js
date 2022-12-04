@@ -30,6 +30,7 @@ const getFeatures = (page) => {
   `);
   const query = `*[_type == "feature" && page == "${page}"] | order(order) {
     ...,
+    "linked_doc_url": research_doc_ref->.file.asset->.url,
      desc[] {
        ...,
        markDefs[] {
@@ -71,9 +72,12 @@ const getFeatures = (page) => {
         url = feature.i_url;
       } else if (feature?.link_type === "external" && feature.e_url) {
         url = feature.e_url;
+      } else if (feature?.link_type === "research" && feature.linked_doc_url) {
+        url = feature.linked_doc_url;
       } else {
         url = null;
       }
+      console.log(feature.link_type);
       if (feature.contentType === "video") {
         featureContent = `<div class="rvt-flex">
         <iframe width="100%" height="315" frameBorder="0" src="${feature.video}" title="video"></iframe></div>`;
@@ -99,7 +103,9 @@ const getFeatures = (page) => {
           </h2>
           <div class="rvt-billboard__content [ rvt-flow ]">
             ${description}
-            <a class="rvt-cta" href="${url}">${feature.link_text}</a>
+            <a class="rvt-cta" target=${
+              feature?.link_type === "research" ? "_blank" : "_self"
+            } href="${url}">${feature.link_text}</a>
           </div>
         </div>
       </div>
