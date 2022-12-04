@@ -84,10 +84,10 @@ p {
 .home-hero {
   background-image: linear-gradient(
       to bottom,
-      rgba(0, 0, 0, 0.55),
-      rgba(0, 0, 0, 0.55)
+      rgba(0, 0, 0, 0.8),
+      rgba(0, 0, 0, 0.425)
     ),
-    url("../assests/HOME_header.jpg");
+    url("../assests/pexels-oleksandr-pidvalnyi-6848112.jpg");
   background-size: cover;
   background-position: left;
   background-repeat: no-repeat;
