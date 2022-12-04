@@ -1,5 +1,8 @@
 import { toHTML } from "@portabletext/to-html";
 import imageUrlBuilder from "@sanity/image-url";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 const sanityClient = require("@sanity/client");
 const client = sanityClient({
@@ -434,6 +437,65 @@ const getResearch = (page) => {
   });
 };
 
+const generate3DScene = (element, asset, scaleY, scaleX, assetScale) => {
+  const scene = new THREE.Scene();
+
+  const light = new THREE.PointLight();
+  light.position.set(2.5, 7.5, 15);
+  scene.add(light);
+
+  const camera = new THREE.PerspectiveCamera(110, scaleX / scaleY, 0.1, 1000);
+
+  camera.position.z = 3;
+
+  const renderer = new THREE.WebGLRenderer({ alpha: true });
+  renderer.setSize(scaleX, scaleY);
+  $(element).append(renderer.domElement);
+
+  const controls = new OrbitControls(camera, renderer.domElement);
+  controls.enableZoom = false;
+  controls.enablePan = false;
+  controls.enableDamping = true;
+
+  const objLoader = new OBJLoader();
+  objLoader.load(
+    asset,
+    (object) => {
+      object.scale.setScalar(assetScale);
+      scene.add(object);
+    },
+    (xhr) => {
+      console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+    },
+    (error) => {
+      console.log(error);
+    }
+  );
+
+  // window.addEventListener("resize", onWindowResize, false);
+  // function onWindowResize() {
+  //   camera.aspect = window.innerWidth / window.innerHeight;
+
+  //   camera.updateProjectionMatrix();
+  //   renderer.setSize(0.5 * window.innerWidth, 0.5 * window.innerHeight);
+  //   render();
+  // }
+
+  function animate() {
+    requestAnimationFrame(animate);
+
+    controls.update();
+
+    render();
+  }
+
+  function render() {
+    renderer.render(scene, camera);
+  }
+
+  animate();
+};
+
 const changePage = function (page, callback) {
   if (page == "") {
     $.get(`pages/home/home.html`, function (data) {
@@ -490,6 +552,14 @@ const changePage = function (page, callback) {
           getProfiles(page, item[0].slug.current);
         });
       } else if (page === "our-research") {
+        generate3DScene(
+          "#3d-vr",
+          "../assests/vr_headset_v01.obj",
+          300,
+          300,
+          0.12
+        );
+
         getResearch(page);
       }
       if (callback) {
