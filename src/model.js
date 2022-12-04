@@ -1,8 +1,10 @@
 import { toHTML } from "@portabletext/to-html";
 import imageUrlBuilder from "@sanity/image-url";
-import * as THREE from "three";
-import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
-import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
+
+//Imports for 3D functionality
+// import * as THREE from "three";
+// import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+// import { OBJLoader } from "three/examples/jsm/loaders/OBJLoader";
 
 const sanityClient = require("@sanity/client");
 const client = sanityClient({
@@ -437,64 +439,61 @@ const getResearch = (page) => {
   });
 };
 
-const generate3DScene = (element, asset, scaleY, scaleX, assetScale) => {
-  const scene = new THREE.Scene();
+//generate3DScene is an unused 3D Function for potential use in the future
+//element - The id/html element to render the scene in
+//Asset - the path to the 3d asset (currently OBJLoader is being used, as the asset we used to test it out was an ojb file, this can be updated or futher changed if different file types need to be loader)
+//ScaleY and ScaleX - the scale of the render, allso effect camera perspective
+//assetScale - the scale of the asset itself
 
-  const light = new THREE.PointLight();
-  light.position.set(2.5, 7.5, 15);
-  scene.add(light);
+// const generate3DScene = (element, asset, scaleY, scaleX, assetScale) => {
+//   const scene = new THREE.Scene();
 
-  const camera = new THREE.PerspectiveCamera(110, scaleX / scaleY, 0.1, 1000);
+//   const light = new THREE.PointLight();
+//   light.position.set(2.5, 7.5, 15);
+//   scene.add(light);
 
-  camera.position.z = 3;
+//   const camera = new THREE.PerspectiveCamera(110, scaleX / scaleY, 0.1, 1000);
 
-  const renderer = new THREE.WebGLRenderer({ alpha: true });
-  renderer.setSize(scaleX, scaleY);
-  $(element).append(renderer.domElement);
+//   camera.position.z = 3;
 
-  const controls = new OrbitControls(camera, renderer.domElement);
-  controls.enableZoom = false;
-  controls.enablePan = false;
-  controls.enableDamping = true;
+//   const renderer = new THREE.WebGLRenderer({ alpha: true });
+//   renderer.setSize(scaleX, scaleY);
+//   $(element).append(renderer.domElement);
 
-  const objLoader = new OBJLoader();
-  objLoader.load(
-    asset,
-    (object) => {
-      object.scale.setScalar(assetScale);
-      scene.add(object);
-    },
-    (xhr) => {
-      console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
-    },
-    (error) => {
-      console.log(error);
-    }
-  );
+//   const controls = new OrbitControls(camera, renderer.domElement);
+//   controls.enableZoom = false;
+//   controls.enablePan = false;
+//   controls.enableDamping = true;
 
-  // window.addEventListener("resize", onWindowResize, false);
-  // function onWindowResize() {
-  //   camera.aspect = window.innerWidth / window.innerHeight;
+//   const objLoader = new OBJLoader();
+//   objLoader.load(
+//     asset,
+//     (object) => {
+//       object.scale.setScalar(assetScale);
+//       scene.add(object);
+//     },
+//     (xhr) => {
+//       console.log((xhr.loaded / xhr.total) * 100 + "% loaded");
+//     },
+//     (error) => {
+//       console.log(error);
+//     }
+//   );
 
-  //   camera.updateProjectionMatrix();
-  //   renderer.setSize(0.5 * window.innerWidth, 0.5 * window.innerHeight);
-  //   render();
-  // }
+//   function animate() {
+//     requestAnimationFrame(animate);
 
-  function animate() {
-    requestAnimationFrame(animate);
+//     controls.update();
 
-    controls.update();
+//     render();
+//   }
 
-    render();
-  }
+//   function render() {
+//     renderer.render(scene, camera);
+//   }
 
-  function render() {
-    renderer.render(scene, camera);
-  }
-
-  animate();
-};
+//   animate();
+// };
 
 const changePage = function (page, callback) {
   if (page == "") {
@@ -552,14 +551,6 @@ const changePage = function (page, callback) {
           getProfiles(page, item[0].slug.current);
         });
       } else if (page === "our-research") {
-        generate3DScene(
-          "#3d-vr",
-          "../assests/vr_headset_v01.obj",
-          300,
-          300,
-          0.12
-        );
-
         getResearch(page);
       }
       if (callback) {
