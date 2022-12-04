@@ -136,6 +136,7 @@ const getCards = (page, cardType) => {
   $(`#${page}-${cardType}Cards`).empty();
   const query = `*[_type == "card" && type == "${cardType}"] | order(order) {
     ...,
+    "linked_doc_url": research_doc_ref->.file.asset->.url,
      desc[] {
        ...,
        markDefs[] {
@@ -177,6 +178,8 @@ const getCards = (page, cardType) => {
         url = card.i_url;
       } else if (card?.link_type === "external" && card.e_url) {
         url = card.e_url;
+      } else if (card?.link_type === "research" && card.linked_doc_url) {
+        url = card.linked_doc_url;
       } else {
         url = null;
       }
@@ -191,7 +194,9 @@ const getCards = (page, cardType) => {
           </div>
           <div class="rvt-card__body rvt-m-bottom-md">
             <h2 class="rvt-card__title -rvt-m-bottom-xs">
-              <a href="${url}">${card.title}</a>
+              <a href="${url}"  target=${
+          card?.link_type === "research" ? "_blank" : "_self"
+        }>${card.title}</a>
             </h2>
             <div class="rvt-card__content [ rvt-flow ]">
               <p class="-rvt-m-bottom-md">
