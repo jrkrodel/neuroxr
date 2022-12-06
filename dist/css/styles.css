@@ -81,7 +81,7 @@ p {
       rgba(0, 0, 0, 0.3),
       rgba(0, 0, 0, 0.3)
     ),
-    url("../assests/newhome-header.jpg");
+    url("../assests/HOME_hero.jpg");
   background-size: cover;
   background-position: 0% 30%;
   background-repeat: no-repeat;
@@ -91,11 +91,25 @@ p {
 }
 
 .home-text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.home-text h1 {
   position: absolute;
   color: white;
-  left: 8%;
-  top: 38%;
+  left: 3%;
+  top: 36%;
   font-size: 5rem;
+}
+
+.home-text h5 {
+  position: absolute;
+  color: white;
+  left: 3%;
+  top: 55%;
+  font-size: 2rem;
 }
 
 .goal-icon {
@@ -142,9 +156,31 @@ form #website {
   .home-hero {
     background-position: 90% 30%;
   }
-  .home-text {
-    top: 20%;
-    align-self: center;
+  .home-text h1 {
     font-size: 4rem;
+    text-align: center;
+    top: 40%;
+  }
+  .home-text h5 {
+    align-self: center;
+    font-size: 1.5rem;
+    text-align: center;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .home-hero {
+    background-position: 90% 30%;
+  }
+  .home-text h1 {
+    font-size: 4rem;
+    margin-top: 1.5rem;
+    position: relative;
+    margin-bottom: -0.8rem;
+    left: 0;
+  }
+  .home-text h5 {
+    position: relative;
+    left: 0;
   }
 }
