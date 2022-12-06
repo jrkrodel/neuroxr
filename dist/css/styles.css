@@ -112,6 +112,27 @@ p {
   font-size: 2rem;
 }
 
+#t-one {
+  border-top-left-radius: 7px;
+}
+
+#t-two {
+  border-top-right-radius: 7px;
+}
+
+.rvt-tabs__tab[aria-selected="true"]:after {
+  background-color: #990000;
+}
+
+.rvt-tabs__tab[aria-selected="true"] {
+  background-color: #990000;
+  color: white;
+}
+
+.rvt-tabs__tab[aria-selected="true"]:hover {
+  color: white;
+}
+
 .goal-icon {
   width: 116px;
   height: 116px;
