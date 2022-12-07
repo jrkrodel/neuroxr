@@ -246,7 +246,7 @@ const getCards = (page, cardType) => {
           </h2>
           <div class="rvt-card__content [ rvt-flow ] ">
             <p class="-rvt-m-bottom-md">
-              We are also looking to obtain more resources and equipment.
+            Stay tuned as we continue to grow our resources and equipment to stay on the cutting edge of XR technology.
             </p>
           </div>
         </div>
@@ -269,7 +269,7 @@ const getCards = (page, cardType) => {
           </h2>
           <div class="rvt-card__content [ rvt-flow ]">
             <p class="-rvt-m-bottom-md">
-             We still encourage you to contact us if you are interesting in NeuroXR!
+            That’s OK! We still encourage you to contact us if you’re interested in contributing to NeuroXR.
             </p>
           </div>
         </div>
