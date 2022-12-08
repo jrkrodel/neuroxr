@@ -25,19 +25,6 @@ p {
   min-height: 100vh;
 }
 
-.cardCustom {
-  flex: 1 1 30rem;
-  margin: 0 15px 0 15px;
-}
-
-.cardContainer {
-  display: flex;
-  margin: 0 auto;
-  width: 60rem;
-  flex-wrap: wrap;
-  justify-content: space-between;
-}
-
 /* Colors */
 :root {
   --dark-red: #990000;
@@ -117,19 +104,7 @@ p {
   position: relative;
 }
 
-/* In-text Links */
-.text-links {
-  color: #4c5a69;
-}
-
 /* Contact Us */
-
-.social-icon {
-  width: 35px;
-  height: 35px;
-  margin-right: 30px;
-}
-
 form #website {
   display: none;
 }

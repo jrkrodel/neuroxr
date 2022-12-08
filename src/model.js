@@ -235,8 +235,10 @@ const getCards = (page, cardType) => {
       <div class="rvt-card">
         <div class="rvt-card__image">
           <img
-            src="https://cdn.sanity.io/images/0m0o2jn4/production/8ae169f437fdef26baf19b07b16330f76a3e1af3-800x450.jpg"
-            alt="test"
+            src="./assests/RE_MoreToCome.jpg"
+            width="530" 
+            height="300"
+            alt="Person with VR Headset outside"
           />
         </div>
         <div class="rvt-card__body rvt-m-bottom-md">
@@ -258,8 +260,10 @@ const getCards = (page, cardType) => {
       <div class="rvt-card">
         <div class="rvt-card__image">
           <img
-            src="https://cdn.sanity.io/images/0m0o2jn4/production/8ae169f437fdef26baf19b07b16330f76a3e1af3-800x450.jpg"
-            alt="test"
+          src="./assests/GETINVOLVED_noRole.jpg"
+          width="530" 
+          height="300"
+            alt="Many people working on computers"
           />
         </div>
         <div class="rvt-card__body rvt-m-bottom-md">
