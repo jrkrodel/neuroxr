@@ -507,7 +507,7 @@ const getResearch = (page) => {
 // };
 
 const changePage = function (page, callback) {
-  if (page == "") {
+  if (page === "" || page === "home") {
     $.get(`pages/home/home.html`, function (data) {
       $("#app").empty();
       $("#app").append(data);
