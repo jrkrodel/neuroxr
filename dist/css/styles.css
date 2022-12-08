@@ -73,23 +73,22 @@ p {
 
 .home-text {
   display: flex;
+  width: 100%;
+  margin-top: 0.5rem;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .home-text h1 {
-  position: absolute;
+  position: relative;
   color: white;
-  left: 3%;
-  top: 36%;
   font-size: 5rem;
+  margin-bottom: -1rem;
 }
 
 .home-text h5 {
-  position: absolute;
+  position: relative;
   color: white;
-  left: 3%;
-  top: 55%;
   font-size: 2rem;
 }
 
@@ -135,35 +134,25 @@ form #website {
   display: none;
 }
 
-@media screen and (max-width: 675px) {
+@media screen and (max-width: 685px) {
   .home-hero {
     background-position: 90% 30%;
+  }
+  .home-text {
+    margin-top: 1.5rem;
   }
   .home-text h1 {
     font-size: 4rem;
     text-align: center;
-    top: 40%;
   }
   .home-text h5 {
-    align-self: center;
     font-size: 1.5rem;
     text-align: center;
   }
 }
 
-@media screen and (max-width: 500px) {
-  .home-hero {
-    background-position: 90% 30%;
-  }
-  .home-text h1 {
-    font-size: 4rem;
-    margin-top: 1.5rem;
-    position: relative;
-    margin-bottom: -0.8rem;
-    left: 0;
-  }
-  .home-text h5 {
-    position: relative;
-    left: 0;
+@media screen and (max-width: 525px) {
+  .home-text {
+    align-items: center;
   }
 }
