@@ -9,7 +9,7 @@
     }
 
     if (empty($_POST["fname"])) {
-        $fNameErr = "fname";
+        $fNameErr = "First name required";
         echo $fNameErr;
         return;
       } else {
@@ -17,7 +17,7 @@
       }
 
     if (empty($_POST["lname"])) {
-        $lNameErr = "lname";
+        $lNameErr = "Last name required";
         echo $lNameErr;
         return;
       } else {
@@ -25,7 +25,7 @@
       }
 
     if (empty($_POST["roleSelect"])) {
-        $roleErr = "Role error";
+        $roleErr = "Role required";
         echo $roleErr;
         return;
       } else {
@@ -33,7 +33,7 @@
       }
 
     if (empty($_POST["subject"])) {
-        $subjectErr = "subject";
+        $subjectErr = "Subject required";
         echo $subjectErr;
         return;
       } else {
@@ -41,7 +41,7 @@
       }
 
     if (empty($_POST["email"])) {
-        $emailErr = "email";
+        $emailErr = "Email required";
         echo $emailErr;
         return;
       } else {
@@ -49,7 +49,7 @@
       }
 
     if (empty($_POST["message"])) {
-        $messageErr = "Message error";
+        $messageErr = "Message required";
         echo $emailErr;
         return;
       } else {
@@ -57,49 +57,50 @@
       } 
     
         if(!preg_match("/^[A-Za-z .'-]+$/", $fName)){
-          $fNameErr= 'Invalid name';
+          $fNameErr = 'Invalid name';
+          echo $fNameErr;
           return;
         }
 
         if(!preg_match("/^[A-Za-z .'-]+$/", $lName)){
           $lNameErr = 'Invalid name';
+          echo $lNameErr;
           return;
         }
 
-        if(!preg_match("/^[A-Za-z .'-]+$/", $subject)){
+        if(preg_match("/\b(?:(?:https?|ftp|http):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i", $subject)){
           $subjectErr = 'Invalid subject';
+          echo $subjectErr;
           return;
         }
+
 
         if(!preg_match("/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}$/", $email)){
           $emailErr = 'Invalid email';
+          echo $emailErr;
           return;
         }
 
         if(strlen($message) === 0){
           $messageErr = 'Your message should not be empty';
-          return;
-        }
-
-        if(preg_match('/http|www/i',$message)) {
-          $messageErr = "We do not allow a url in the comment";
           echo $messageErr;
           return;
         }
+
       
         if(!isset($fNameErr) && !isset($lNameErr) && !isset($emailErr) && !isset($subjectErr) && !isset($messageErr) && !isset($roleErr)){
-          $to = 'neuroxr@iu.edu'; 
+          $to = 'jrkrodel@iu.edu'; 
           $body = " Name: $fName $lName\n E-mail: $email\n Role: $role\n Message:\n $message";
           if(mail($to, $subject, $body)){
             echo 'sent';
             mail($email, "Thank you for your message", "Thank you for messaging NeuroXR! We have recieved your inquiry and will respond as soon as possible.");
             return;
           }else{
-            echo 'Error Here';
+            echo 'Error Occured, please check all fields follow requirements and try again';
             return;
           }
     } else {
-      echo "Error There";
+      echo "Error Occured, please check all fields follow requirements and try again";
       return;
     }
   }

@@ -467,7 +467,7 @@ const getResearch = (page) => {
     $(`#${page}-research`).empty();
     if (research.length > 0) {
       $(`#${page}-research`).append(
-        `<h1 class="rvt-ts-lg">More of our Research</h1>`
+        `<h1 class="rvt-ts-lg">Publications and Posters</h1>`
       );
       research.forEach((doc, ind) => {
         const description = toHTML(doc.description, {
@@ -569,14 +569,17 @@ const changePage = function (page, callback) {
           url: actionUrl,
           data: form, // serializes the form's elements.
           success: function (result) {
-            $("#fname").val("");
-            $("#lname").val("");
-            $("#email").val("");
-            $("#subject").val("");
-            $("#message").val("");
             if (result !== "sent") {
-              $("#submit").val("Error Occured, please try again");
+              $("#submit").val(result);
+              setTimeout(() => {
+                $("#submit").val("Submit");
+              }, "10000");
             } else {
+              $("#fname").val("");
+              $("#lname").val("");
+              $("#email").val("");
+              $("#subject").val("");
+              $("#message").val("");
               $("#submit").val("Message Sent!");
               setTimeout(() => {
                 $("#submit").val("Submit");
