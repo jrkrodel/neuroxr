@@ -77,7 +77,7 @@ const getFeatures = (page) => {
       } else {
         url = null;
       }
-      console.log(feature.link_type);
+
       if (feature.contentType === "video") {
         featureContent = `<div class="rvt-flex">
         <iframe width="100%" height="315" frameBorder="0" src="${feature.video}" title="video"></iframe></div>`;
@@ -169,7 +169,6 @@ const getCards = (page, cardType) => {
   client.fetch(query).then((cards) => {
     $(`#${page}-${cardType}Cards`).empty();
     cards.forEach((card, ind) => {
-      console.log(card);
       const description = toHTML(card.desc, {
         components: cardComponents,
       });
@@ -293,7 +292,6 @@ const getProfiles = (page, type) => {
     .then((items) => {
       $(`#profile-profileTypes`).empty();
       items.forEach((item, ind) => {
-        console.log(ind);
         if (item.slug.current === type) {
           $(`#profile-profileTypes`).append(`
       <li class="rvt-subnav__item">
@@ -321,7 +319,6 @@ const getProfiles = (page, type) => {
   const profileComponents = {
     marks: {
       profileLink: (props) => {
-        console.log(props);
         return `<a href="${props.value.url}" class="rvt-cta">${props.text}</a>`;
       },
     },
@@ -330,9 +327,37 @@ const getProfiles = (page, type) => {
   client.fetch(queryProfiles).then((profiles) => {
     $(`#${page}-profiles`).empty();
     $(`#${page}-profiles`).addClass("rvt-container-lg rvt-p-top-sm");
+
     const alumniProfiles = [];
     if (profiles.length > 0) {
       profiles.forEach((profile, ind) => {
+        let profileEmail;
+        let profilePhoto;
+        if (profile.email) {
+          profileEmail = `<a
+              class="rvt-ts-xs-md-up rvt-ts-xxs"
+              href="mailto:${profile.email}"
+            >
+              ${profile.email}
+            </a>`;
+        } else {
+          profileEmail = "";
+        }
+        if (profile.image) {
+          profilePhoto = `<img
+          class="rvt-m-right-xl-md-up rvt-border-radius-circle"
+            src="${urlFor(profile.image).width(165).height(165).url()}"
+            alt="${profile.alt}"
+          />`;
+        } else {
+          profilePhoto = `<img
+          width="165"
+          height="165"
+          class="rvt-m-right-xl-md-up rvt-border-radius-circle"
+            src="./assests/blank_profile.png"
+            alt="empty profile image"
+          />`;
+        }
         if (profile.alumni === false) {
           const bio = toHTML(profile.bio, {
             components: profileComponents,
@@ -341,14 +366,10 @@ const getProfiles = (page, type) => {
           $(`#${page}-profiles`).append(`
 
         <div
-        class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
+        class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-start rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
       >
         <!-- Image -->
-        <img
-        class="rvt-m-right-xl-md-up rvt-border-radius-circle"
-          src="${urlFor(profile.image).width(165).height(165).url()}"
-          alt="${profile.alt}"
-        />
+        ${profilePhoto}
         <!-- Content -->
         <div>
         <div class="rvt-card__eyebrow">${
@@ -356,9 +377,7 @@ const getProfiles = (page, type) => {
         }</div>
           <h2>${profile.name}</h2>
           ${bio}
-          <a class="rvt-ts-xs-md-up rvt-ts-xxs" href="mailto:${
-            profile.email
-          }">${profile.email}</a>
+          ${profileEmail}
 
         </div>
       </div>
@@ -373,6 +392,33 @@ const getProfiles = (page, type) => {
           <h1 class="rvt-ts-lg rvt-border-bottom">Alumni</h1>
         </div>`);
         alumniProfiles.forEach((profile) => {
+          let profileEmail;
+          let profilePhoto;
+          if (profile.email) {
+            profileEmail = `<a
+              class="rvt-ts-xs-md-up rvt-ts-xxs"
+              href="mailto:${profile.email}"
+            >
+              ${profile.email}
+            </a>`;
+          } else {
+            profileEmail = "";
+          }
+          if (profile.image) {
+            profilePhoto = `<img
+          class="rvt-m-right-xl-md-up rvt-border-radius-circle"
+            src="${urlFor(profile.image).width(165).height(165).url()}"
+            alt="${profile.alt}"
+          />`;
+          } else {
+            profilePhoto = `<img
+          width="165"
+          height="165"
+          class="rvt-m-right-xl-md-up rvt-border-radius-circle"
+            src="./assests/blank_profile.png"
+            alt="empty profile image"
+          />`;
+          }
           const bio = toHTML(profile.bio, {
             components: profileComponents,
           });
@@ -380,14 +426,10 @@ const getProfiles = (page, type) => {
           $(`#${page}-profiles`).append(`
 
         <div
-        class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-center rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
+        class="rvt-flex-md-up rvt-flow rvt-flex-column rvt-flex-row-md-up rvt-items-start rvt-p-all-lg-md-up rvt-p-all-sm rvt-border-all rvt-border-radius rvt-m-bottom-xl"
       >
         <!-- Image -->
-        <img
-        class="rvt-m-right-xl-md-up rvt-border-radius-circle"
-          src="${urlFor(profile.image).width(165).height(165).url()}"
-          alt="${profile.alt}"
-        />
+        ${profilePhoto}
         <!-- Content -->
         <div>
         <div class="rvt-card__eyebrow">${
@@ -395,10 +437,7 @@ const getProfiles = (page, type) => {
         }</div>
           <h2>${profile.name}</h2>
           ${bio}
-          <a class="rvt-ts-xs-md-up rvt-ts-xxs" href="mailto:${
-            profile.email
-          }">${profile.email}</a>
-
+          ${profileEmail}
         </div>
       </div>
       `);
