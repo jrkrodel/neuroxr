@@ -235,7 +235,7 @@ const getCards = (page, cardType) => {
       <div class="rvt-card">
         <div class="rvt-card__image">
           <img
-            src="./assests/RE_MoreToCome.jpg"
+            src="./assests/RE_moreToCome.jpg"
             width="530" 
             height="300"
             alt="Person with VR Headset outside"
@@ -358,7 +358,7 @@ const getProfiles = (page, type) => {
           width="165"
           height="165"
           class="rvt-m-right-xl-md-up rvt-border-radius-circle"
-            src="./assests/blank_profile.png"
+            src="./assests/OURTEAM_blankProfile.png"
             alt="empty profile image"
           />`;
         }
@@ -419,7 +419,7 @@ const getProfiles = (page, type) => {
           width="165"
           height="165"
           class="rvt-m-right-xl-md-up rvt-border-radius-circle"
-            src="./assests/blank_profile.png"
+            src="./assests/OURTEAM_blankProfile.png"
             alt="empty profile image"
           />`;
           }
