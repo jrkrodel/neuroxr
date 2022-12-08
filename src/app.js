@@ -13,6 +13,12 @@ function route() {
 function initListeners() {
   $(window).on("hashchange", route);
   route();
+  $("#mainNav a").click(() => {
+    if (window.innerWidth < 1080) {
+      const disclosure = document.querySelector('[data-rvt-disclosure="menu"]');
+      disclosure.close();
+    }
+  });
 }
 
 $(document).ready(function () {
