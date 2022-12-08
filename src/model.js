@@ -573,7 +573,7 @@ const changePage = function (page, callback) {
               $("#submit").val(result);
               setTimeout(() => {
                 $("#submit").val("Submit");
-              }, "10000");
+              }, "5000");
             } else {
               $("#fname").val("");
               $("#lname").val("");
@@ -583,7 +583,7 @@ const changePage = function (page, callback) {
               $("#submit").val("Message Sent!");
               setTimeout(() => {
                 $("#submit").val("Submit");
-              }, "10000");
+              }, "5000");
             }
           },
         });
