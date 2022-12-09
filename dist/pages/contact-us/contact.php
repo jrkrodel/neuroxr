@@ -89,7 +89,7 @@
 
       
         if(!isset($fNameErr) && !isset($lNameErr) && !isset($emailErr) && !isset($subjectErr) && !isset($messageErr) && !isset($roleErr)){
-          $to = 'neuroxr@iu.edu'; 
+          $to = 'neuroxr@iupui.edu'; 
           $body = " Name: $fName $lName\n E-mail: $email\n Role: $role\n Message:\n $message";
           if(mail($to, $subject, $body)){
             echo 'sent';
