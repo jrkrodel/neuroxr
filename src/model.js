@@ -550,7 +550,6 @@ const getResearch = (page) => {
 // };
 
 const changePage = function (page) {
-  // console.log(page);
   if (page === "" || page === "home") {
     $.get(`pages/home/home.html`, function (data) {
       $("#app").empty();
