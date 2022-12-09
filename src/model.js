@@ -268,7 +268,7 @@ const getCards = (page, cardType) => {
         </div>
         <div class="rvt-card__body rvt-m-bottom-md">
           <h2 class="rvt-card__title -rvt-m-bottom-xs">
-            <a href="#/contact-us}">Don't see a role that fits?</a>
+            <a href="#contact-us">Don't see a role that fits?</a>
           </h2>
           <div class="rvt-card__content [ rvt-flow ]">
             <p class="-rvt-m-bottom-md">
@@ -299,12 +299,12 @@ const getProfiles = (page, type) => {
         if (item.slug.current === type) {
           $(`#profile-profileTypes`).append(`
       <li class="rvt-subnav__item">
-        <a aria-current="page" id="${item.slug.current}" href="#/our-team">${item.title}</a>
+        <a aria-current="page" id="${item.slug.current}" href="#our-team">${item.title}</a>
       </li>`);
         } else {
           $(`#profile-profileTypes`).append(`
         <li class="rvt-subnav__item">
-          <a id="${item.slug.current}" href="#/our-team">${item.title}</a>
+          <a id="${item.slug.current}" href="#our-team">${item.title}</a>
         </li>`);
         }
       });
@@ -549,7 +549,8 @@ const getResearch = (page) => {
 //   animate();
 // };
 
-const changePage = function (page, callback) {
+const changePage = function (page) {
+  // console.log(page);
   if (page === "" || page === "home") {
     $.get(`pages/home/home.html`, function (data) {
       $("#app").empty();
@@ -593,12 +594,19 @@ const changePage = function (page, callback) {
         });
       });
     });
-  } else {
+  } else if (
+    page === "resources-equipment" ||
+    page === "get-involved" ||
+    page === "our-team" ||
+    page === "our-research" ||
+    page === "about"
+  ) {
     $.get(`pages/${page}/${page}.html`, function (data) {
       $("#app").empty();
       $("#app").append(data);
       $("body").scrollTop(0);
       if (page === "resources-equipment") {
+        getFeatures(page);
         getCards(page, "equipment");
       } else if (page === "get-involved") {
         getCards(page, "sRole");
@@ -608,11 +616,18 @@ const changePage = function (page, callback) {
           getProfiles(page, item[0].slug.current);
         });
       } else if (page === "our-research") {
+        getFeatures(page);
         getResearch(page);
+      } else if (page === "about") {
+        getFeatures(page);
       }
-      if (callback) {
-        callback(page);
-      }
+    });
+  } else {
+    $.get(`pages/home/home.html`, function (data) {
+      $("#app").empty();
+      $("#app").append(data);
+      getFeatures("home");
+      $("body").scrollTop(0);
     });
   }
 };
