@@ -9,12 +9,18 @@ As students of N420 Multimedia Project Development, we have been tasked with cre
 ## Table of Contents
 
 - [Deployed](#deployed)
+- [Sanity CMS](#Sanity)
 - [Contributing](#contributing)
 - [Questions](#questions)
 
 ## Deployed Link
 
 https://neuroxr.iu.edu/
+
+## Sanity
+
+Studio: https://neuroxr.sanity.studio/desk (Need access to be able to view)
+Organization: https://www.sanity.io/organizations/oCaTP3OUj
 
 ## Contributing
 
